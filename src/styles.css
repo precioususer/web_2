@@ -1,0 +1,55 @@
+/* @import "./reset.css"; */
+
+/* #root {
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+} */
+
+/* .header {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+
+  height: 130px;
+  width: 100wh;
+
+  background-color: black;
+  color: white;
+
+  padding-left: 80px;
+} */
+
+/* .logo {
+  display: flex;
+  background-image: url(./../public/logo.png);
+
+  height: 90px;
+  width: 150px;
+} */
+
+/* .navbar {
+  display: flex;
+  flex-direction: row;
+  gap: 45px;
+  font-size: 20px;
+} */
+
+/* .navlink {
+  text-decoration: none;
+  color: white;
+} */
+
+.main {
+  display: flex;
+  background-image: url(./../public/bg_1.png);
+  background-size: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  height: calc(100vh - 130px);
+  width: 100vw;
+}
