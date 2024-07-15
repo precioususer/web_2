@@ -6,7 +6,7 @@ module.exports = {
   entry: "./src/index.js",
 
   output: {
-    filename: "bundle.js",
+    filename: "index.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
     assetModuleFilename: "assets/image/[name].[ext]",

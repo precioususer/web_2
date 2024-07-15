@@ -1,9 +1,4 @@
-import { Header } from "./components/header.component";
-// import fontHtml from "./styles";
-
-// let Head = document.head;
-
-// Head.appendChild(fontHtml);
+import { Header } from "./components/Header";
 
 const root = document.getElementById("root");
 
