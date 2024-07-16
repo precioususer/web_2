@@ -23,6 +23,14 @@ module.exports = {
     port: 3000,
   },
   module: {
-    rules: [],
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: "file-loader",
+        options: {
+          outputPath: "assets",
+        },
+      },
+    ],
   },
 };
