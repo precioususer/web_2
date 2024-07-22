@@ -141,14 +141,25 @@ export function DropDown(props) {
         const title = HTML.querySelector("h3");
         const buttonTitle =
           HTML.parentNode.parentNode.parentNode.firstChild.firstChild;
+        const dropdownMenu = HTML.parentNode.parentNode.parentNode.lastChild;
 
         HTML.parentNode.parentNode.addEventListener("click", () => {
+          // Showing "V" logic
+
           if (realCheckbox.checked) {
             customCheckboxAfter.style.display = "block";
             state.name = title.innerText;
             buttonTitle.innerText = state.name;
           } else {
             customCheckboxAfter.style.display = "none";
+          }
+
+          // Closing Menu when smthing was choosen logic
+
+          if (dropdownMenu.style.display === "none") {
+            dropdownMenu.style.display = "flex";
+          } else {
+            dropdownMenu.style.display = "none";
           }
         });
       });
