@@ -4,8 +4,6 @@ export function Logo() {
   let logoElement = document.createElement("div");
   logoElement.id = "logo";
 
-  console.log(img);
-
   const stl = {
     display: "flex",
     backgroundImage: `url(${img})`,
