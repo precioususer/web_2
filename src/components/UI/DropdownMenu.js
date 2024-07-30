@@ -29,6 +29,7 @@ export function DropDown(props) {
       paddingBottom: "13px",
       paddingLeft: "14px",
       paddingRight: "35px",
+      fontFamily: "inherit",
       fontWeight: "500",
       fontSize: "18px",
       lineHeight: "20px",
@@ -36,7 +37,6 @@ export function DropDown(props) {
       cursor: "pointer",
     },
     dropdownButtonAfter: {
-      content: "",
       backgroundImage: `url(${arrowImg})`,
       position: "absolute",
       top: "50%",
@@ -104,13 +104,17 @@ export function DropDown(props) {
 
   // CREATE function for creating HTML elements with needed actions and styles \/
 
-  const create = (tag, id) => {
+  const create = (tag, className) => {
     const HTML = document.createElement(tag);
-    HTML.id = id;
+
+    HTML.id = `${className}-${Math.random().toString(10).substr(2, 6)}`;
+
+    HTML.classList.add(className);
+    Object.assign(HTML.style, mainStl[className]);
 
     // Menu opening \/
 
-    if (id === "dropdownButton") {
+    if (className === "dropdownButton") {
       HTML.addEventListener("click", () => {
         const dropdownMenu = HTML.parentNode.lastChild;
 
@@ -122,7 +126,7 @@ export function DropDown(props) {
       });
     }
 
-    if (id === "dropdownItemLabel") {
+    if (className === "dropdownItemLabel") {
       // Hover effect for custom checkbox \/
 
       HTML.addEventListener("mouseover", () => {
@@ -136,15 +140,15 @@ export function DropDown(props) {
       // Actions when some option is checked
 
       HTML.addEventListener("click", () => {
-        const realCheckbox = HTML.querySelector("#realCheckbox");
-        const customCheckboxAfter = HTML.querySelector("#customCheckboxAfter");
+        const realCheckbox = HTML.querySelector(".realCheckbox");
+        const customCheckboxAfter = HTML.querySelector(".customCheckboxAfter");
         const title = HTML.querySelector("h3");
         const buttonTitle =
           HTML.parentNode.parentNode.parentNode.firstChild.firstChild;
         const dropdownMenu = HTML.parentNode.parentNode.parentNode.lastChild;
 
         HTML.parentNode.parentNode.addEventListener("click", () => {
-          // Showing "V" logic
+          // Showing "V" logic \/
 
           if (realCheckbox.checked) {
             customCheckboxAfter.style.display = "block";
@@ -154,7 +158,7 @@ export function DropDown(props) {
             customCheckboxAfter.style.display = "none";
           }
 
-          // Closing Menu when smthing was choosen logic
+          // Closing Menu when smthing was choosen logic \/
 
           if (dropdownMenu.style.display === "none") {
             dropdownMenu.style.display = "flex";
@@ -165,15 +169,12 @@ export function DropDown(props) {
       });
     }
 
-    Object.assign(HTML.style, mainStl[id]);
-
     return HTML;
   };
 
   // Set local state \/
 
-  const state = defaultObj;
-  Object.assign(state, props);
+  const state = { ...defaultObj, ...props };
 
   //Creating HTML structure \/
 

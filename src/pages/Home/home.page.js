@@ -1,6 +1,7 @@
 import img from "./../../../public/bg_1.png";
 import { DropDown } from "./../../components/UI/DropdownMenu";
 import { Button } from "./../../components/UI/Button";
+import { SearchBar } from "./../../components/UI/SearchBar";
 
 export function homePage() {
   let homePageDiv = document.createElement("div");
@@ -17,8 +18,7 @@ export function homePage() {
     backgroundPosition: "center",
     backgroundSize: "cover",
 
-    height: "calc(100vh - 130px)",
-    width: "100vw",
+    minHeight: "calc(100vh - 130px)",
   };
 
   Object.assign(homePageDiv.style, stl);
@@ -30,9 +30,11 @@ export function homePage() {
     },
     {
       name: "Side",
-      values: ["Light", "Darness"],
+      values: ["Light", "Darkness"],
     },
   ];
+
+  homePageDiv.appendChild(SearchBar());
 
   homePageDiv.appendChild(DropDown(types[0]));
 
@@ -41,6 +43,8 @@ export function homePage() {
   homePageDiv.appendChild(Button("large", "CHEWBACCA"));
   homePageDiv.appendChild(Button("regular", "Djedai"));
   homePageDiv.appendChild(Button("small", "druid"));
+  homePageDiv.appendChild(Button("addBtn"));
+  homePageDiv.appendChild(Button("clsBtn"));
 
   return homePageDiv;
 }
