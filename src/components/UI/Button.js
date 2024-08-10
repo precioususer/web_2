@@ -24,6 +24,13 @@ export function Button(size, title) {
       height: "30px",
       fontSize: "14px",
     },
+    smallGray: {
+      width: "85px",
+      minHeight: "30px",
+      height: "30px",
+      fontSize: "14px",
+      backgroundColor: "#C4C4C4",
+    },
     regular: {
       width: "139px",
       minHeight: "54px",
@@ -156,9 +163,14 @@ export function Button(size, title) {
       break;
 
     default:
+      Object.assign(buttonElement.style, mainStl);
       switch (size) {
         case "small":
           Object.assign(buttonElement.style, btnSizeStl.small);
+          break;
+        case "small-gray":
+          Object.assign(buttonElement.style, btnSizeStl.smallGray);
+
           break;
         case "regular":
           Object.assign(buttonElement.style, btnSizeStl.regular);
@@ -175,24 +187,46 @@ export function Button(size, title) {
       buttonTitle.innerText = title ?? "default";
       buttonElement.appendChild(buttonTitle);
 
-      Object.assign(buttonElement.style, mainStl);
       buttonTitle.style.fontSize = "inherit";
 
-      buttonElement.addEventListener("mouseover", () => {
-        buttonElement.style.backgroundColor = "#0c92cc";
-      });
+      switch (size) {
+        case "small-gray":
+          buttonElement.addEventListener("mouseover", () => {
+            buttonElement.style.backgroundColor = "#777777";
+          });
 
-      buttonElement.addEventListener("mousedown", () => {
-        buttonElement.style.backgroundColor = "#03b3ff";
-      });
+          buttonElement.addEventListener("mousedown", () => {
+            buttonElement.style.backgroundColor = "#888888";
+          });
 
-      buttonElement.addEventListener("mouseup", () => {
-        buttonElement.style.backgroundColor = "#0c92cc";
-      });
+          buttonElement.addEventListener("mouseup", () => {
+            buttonElement.style.backgroundColor = "#777777";
+          });
 
-      buttonElement.addEventListener("mouseleave", () => {
-        buttonElement.style.backgroundColor = "#3fc4fd";
-      });
+          buttonElement.addEventListener("mouseleave", () => {
+            buttonElement.style.backgroundColor = "#C4C4C4";
+          });
+          break;
+
+        default:
+          buttonElement.addEventListener("mouseover", () => {
+            buttonElement.style.backgroundColor = "#0c92cc";
+          });
+
+          buttonElement.addEventListener("mousedown", () => {
+            buttonElement.style.backgroundColor = "#03b3ff";
+          });
+
+          buttonElement.addEventListener("mouseup", () => {
+            buttonElement.style.backgroundColor = "#0c92cc";
+          });
+
+          buttonElement.addEventListener("mouseleave", () => {
+            buttonElement.style.backgroundColor = "#3fc4fd";
+          });
+          break;
+      }
+
       break;
   }
 

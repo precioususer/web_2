@@ -43,6 +43,7 @@ export function homePage() {
   homePageDiv.appendChild(Button("large", "CHEWBACCA"));
   homePageDiv.appendChild(Button("regular", "Djedai"));
   homePageDiv.appendChild(Button("small", "druid"));
+  homePageDiv.appendChild(Button("small-gray", "cancel"));
   homePageDiv.appendChild(Button("addBtn"));
   homePageDiv.appendChild(Button("clsBtn"));
 
