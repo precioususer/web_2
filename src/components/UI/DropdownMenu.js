@@ -1,7 +1,7 @@
 import arrowImg from "./../../../public/icons/arrow.png";
 import checkBoxImg from "./../../../public/icons/checkbox.png";
 
-export function DropDown(props) {
+export function DropdownMenu(props) {
   // Default data \/
 
   const defaultObj = {

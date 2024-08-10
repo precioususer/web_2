@@ -9,6 +9,8 @@ export function Title(size, title) {
   const titleSizeStl = {
     h1plus: { fontWeight: "800", fontSize: "72px" },
     h1: { fontWeight: "800", fontSize: "48px" },
+    p35: { fontWeight: "400", fontSize: "35px" },
+    p30: { fontWeight: "400", fontSize: "30px" },
     p24: { fontWeight: "400", fontSize: "24px" },
     p20: { fontWeight: "400", fontSize: "20px" },
     p18: { fontWeight: "400", fontSize: "18px" },
@@ -29,6 +31,12 @@ export function Title(size, title) {
     default:
       titleElement = document.createElement("p");
       switch (size) {
+        case "p35":
+          Object.assign(titleElement.style, titleSizeStl.p35);
+          break;
+        case "p30":
+          Object.assign(titleElement.style, titleSizeStl.p30);
+          break;
         case "p24":
           Object.assign(titleElement.style, titleSizeStl.p24);
           break;

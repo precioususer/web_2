@@ -18,19 +18,17 @@ export function errorPage() {
 
     paddingTop: "60vh",
 
-    minHeight: "calc(100vh - 130px - 60vh)",
+    borderTop: "solid 1px white",
+
+    minHeight: "calc(100vh - 130px - 60vh - 1px)",
     width: "calc(100vw)",
   };
 
   Object.assign(errorPageDiv.style, stl);
 
-  const errorTitle = Title(
-    "p24",
-    "This page is not fully armed and operational."
+  errorPageDiv.appendChild(
+    Title("p35", "This page is not fully armed and operational.")
   );
-  errorTitle.style.fontSize = "35px";
-
-  errorPageDiv.appendChild(errorTitle);
   errorPageDiv.appendChild(Button("regular", "Return"));
 
   return errorPageDiv;
