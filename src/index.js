@@ -1,5 +1,5 @@
 import { Header } from "./components/Header";
-import { homePage } from "./pages/Home/home.page";
+import { errorPage } from "./pages/404/error.page";
 
 const root = document.getElementById("root");
 
@@ -18,4 +18,4 @@ const stl = {
 Object.assign(root.style, stl);
 
 root.appendChild(Header());
-root.appendChild(homePage());
+root.appendChild(errorPage());
