@@ -1,4 +1,5 @@
 import Img from "./../../../public/Character.png";
+import { BorderLine } from "./BorderLine";
 import { Title } from "./Title";
 
 export function Card(props) {
@@ -73,24 +74,14 @@ export function Card(props) {
   Object.assign(heroPropRace.style, heroPropStl);
   Object.assign(heroPropSide.style, heroPropStl);
 
-  function Border() {
-    const border = document.createElement("div");
-    Object.assign(border.style, {
-      height: "1px",
-      width: "100%",
-      backgroundColor: "#FFFFFF",
-    });
-    return border;
-  }
-
   heroPropGender.appendChild(Title("p18", props.gender));
   heroPropGender.appendChild(Title("p18", "Gender"));
   wrapperInfo.appendChild(heroPropGender);
-  wrapperInfo.appendChild(Border());
+  wrapperInfo.appendChild(BorderLine("horizontal", "100%"));
   heroPropRace.appendChild(Title("p18", "Race"));
   heroPropRace.appendChild(Title("p18", props.race));
   wrapperInfo.appendChild(heroPropRace);
-  wrapperInfo.appendChild(Border());
+  wrapperInfo.appendChild(BorderLine("horizontal", "100%"));
   heroPropSide.appendChild(Title("p18", "Side"));
   heroPropSide.appendChild(Title("p18", props.side));
   wrapperInfo.appendChild(heroPropSide);

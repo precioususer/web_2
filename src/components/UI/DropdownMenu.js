@@ -1,7 +1,7 @@
 import arrowImg from "./../../../public/icons/arrow.png";
 import checkBoxImg from "./../../../public/icons/checkbox.png";
 
-export function DropdownMenu(props) {
+export function DropdownMenu(props, size) {
   // Default data \/
 
   const defaultObj = {
@@ -101,6 +101,106 @@ export function DropdownMenu(props) {
       pointerEvents: "none",
     },
   };
+
+  if (size === "slim") {
+    mainStl.dropdownElement = {
+      position: "relative",
+      width: "127px",
+    };
+    mainStl.dropdownButton = {
+      position: "relative",
+      display: "block",
+      textAlign: "left",
+      backgroundColor: "#000000",
+      border: "1px solid #FFFFFF",
+      borderRadius: "6px",
+      width: "100%",
+      height: "30px",
+      paddingTop: "7.5px",
+      paddingBottom: "7.5px",
+      paddingLeft: "7px",
+      paddingRight: "35px",
+      fontFamily: "inherit",
+      fontWeight: "400",
+      fontSize: "14px",
+      lineHeight: "15px",
+      color: "#ffffff",
+      cursor: "pointer",
+    };
+
+    mainStl.dropdownButtonAfter = {
+      backgroundImage: `url(${arrowImg})`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      position: "absolute",
+      top: "50%",
+      right: "11.5px",
+      transform: "translateY(-50%)",
+      width: "10px",
+      height: "5.5px",
+      pointerEvents: "none",
+    };
+
+    mainStl.dropdownList = {
+      display: "none",
+      flexDirection: "column",
+      gap: "15px",
+      position: "absolute",
+      top: "37px",
+      margin: "0",
+      padding: "20px 14px",
+      listStyleType: "none",
+      backgroundColor: "#000000",
+      overflow: "hidden",
+      border: "1px solid #FFFFFF",
+      borderRadius: "6px",
+      width: "calc(100% - 2px - 14px * 2)",
+      zIndex: "1",
+    };
+
+    mainStl.dropdownItem = {
+      margin: "0",
+      padding: "0",
+      fontWeight: "500",
+      fontSize: "14px",
+      color: "#ffffff",
+    };
+
+    mainStl.dropdownItemLabel = {
+      display: "flex",
+      flexDirection: "row",
+      gap: "12px",
+      fontWeight: "500",
+      fontSize: "14px",
+      color: "#494949",
+      transition: "border-color 0.3s ease",
+    };
+
+    mainStl.realCheckbox = {
+      display: "none",
+    };
+
+    mainStl.customCheckbox = {
+      position: "relative",
+      height: "calc(15px - 3px)",
+      width: "calc(15px - 3px)",
+      border: "1.5px solid #ffffff",
+      borderRadius: "4px",
+    };
+
+    mainStl.customCheckboxAfter = {
+      display: "none",
+      borderRadius: "4px",
+      backgroundImage: `url(${checkBoxImg})`,
+      backgroundSize: "contain",
+      position: "absolute",
+      top: "-1.5px",
+      left: "-1.5px",
+      width: "15px",
+      height: "15px",
+      pointerEvents: "none",
+    };
+  }
 
   // CREATE function for creating HTML elements with needed actions and styles \/
 

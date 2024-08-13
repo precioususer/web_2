@@ -12,7 +12,7 @@ const stl = {
   fontWeight: "400",
   backgroundColor: "black",
 
-  height: "100vh",
+  //height: "100vh",
 };
 
 Object.assign(root.style, stl);

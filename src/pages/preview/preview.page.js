@@ -5,6 +5,7 @@ import { SearchBar } from "./../../components/UI/SearchBar";
 import { DropdownMenu } from "./../../components/UI/DropdownMenu";
 import { Button } from "./../../components/UI/Button";
 import { Card } from "../../components/UI/Card";
+import { AddForm } from "../../components/AddForm/AddForm";
 
 const props = {
   img: Yoda,
@@ -48,6 +49,8 @@ export function previewPage() {
   const container = document.createElement("div");
   Object.assign(container.style, containerStl);
   previewPageDiv.appendChild(container);
+
+  container.appendChild(AddForm());
 
   container.appendChild(Title("p35", "Who's Your Favorite Star Wars"));
 
