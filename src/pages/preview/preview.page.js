@@ -1,19 +1,11 @@
 import img from "./../../../public/bg.png";
-import Yoda from "./../../../public/Character.png";
 import { Title } from "./../../components/UI/Title";
 import { SearchBar } from "./../../components/UI/SearchBar";
 import { DropdownMenu } from "./../../components/UI/DropdownMenu";
 import { Button } from "./../../components/UI/Button";
-import { Card } from "../../components/UI/Card";
 import { AddForm } from "../../components/AddForm/AddForm";
-
-const props = {
-  img: Yoda,
-  name: "Yoda",
-  gender: "Male",
-  race: "@#$!",
-  side: "Light",
-};
+import mockData from "./../../mockdata/heroes";
+import { Carousel } from "../../components/Carousel/Carousel";
 
 export function previewPage() {
   let previewPageDiv = document.createElement("div");
@@ -43,14 +35,15 @@ export function previewPage() {
 
     paddingTop: "35px",
 
-    width: "60vw",
+    width: "1280px",
   };
 
   const container = document.createElement("div");
   Object.assign(container.style, containerStl);
   previewPageDiv.appendChild(container);
 
-  container.appendChild(AddForm());
+  const addForm = AddForm();
+  container.appendChild(addForm);
 
   container.appendChild(Title("p35", "Who's Your Favorite Star Wars"));
 
@@ -63,6 +56,8 @@ export function previewPage() {
   // --------- Filter group ---------
 
   const filterGroupStl = {
+    position: "relative",
+
     display: "flex",
     flexDirection: "row",
     alignSelf: "start",
@@ -87,9 +82,19 @@ export function previewPage() {
 
   container.appendChild(filterGroup);
 
+  // --------- Add form event ---------
+
+  previewPageDiv.addEventListener("click", (event) => {
+    if (event.target.closest(`#${add.id}`)) {
+      addForm.style.display = "flex";
+    }
+  });
+
   // --------- Characters ---------
 
-  container.appendChild(Card(props));
+  const characters = Carousel(mockData);
+  characters.style.marginTop = "29px";
+  container.appendChild(characters);
 
   Object.assign(previewPageDiv.style, stl);
   return previewPageDiv;

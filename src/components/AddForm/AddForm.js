@@ -9,9 +9,14 @@ export function AddForm() {
   AddFormDiv.id = `AddForm-${Math.random().toString(10).substr(2, 6)}`;
 
   const stl = {
-    position: "relative",
+    position: "absolute",
+    zIndex: "2",
 
-    display: "flex",
+    top: "50%",
+    left: "50%",
+    transform: "translateY(-50%) translateX(-50%)",
+
+    display: "none",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -41,6 +46,12 @@ export function AddForm() {
   Object.assign(closeBtn.style, closeBtnStl);
 
   AddFormDiv.appendChild(closeBtn);
+
+  AddFormDiv.addEventListener("click", (event) => {
+    if (event.target.closest(`#${closeBtn.id}`)) {
+      AddFormDiv.style.display = "none";
+    }
+  });
 
   // --------- Left Side ---------
 

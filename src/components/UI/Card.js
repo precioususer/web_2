@@ -1,4 +1,3 @@
-import Img from "./../../../public/Character.png";
 import { BorderLine } from "./BorderLine";
 import { Title } from "./Title";
 
@@ -42,7 +41,7 @@ export function Card(props) {
   };
 
   const cardImg = document.createElement("img");
-  cardImg.src = Img;
+  cardImg.src = props.img;
   Object.assign(cardImg.style, imgStl);
   cardDiv.appendChild(cardImg);
 
