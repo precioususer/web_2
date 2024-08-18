@@ -72,9 +72,24 @@ export function previewPage() {
   const filterGroup = document.createElement("div");
   Object.assign(filterGroup.style, filterGroupStl);
 
-  filterGroup.appendChild(DropdownMenu());
-  filterGroup.appendChild(DropdownMenu());
-  filterGroup.appendChild(DropdownMenu());
+  const dropdownMenuOptions = {
+    gender: {
+      name: "Gender",
+      values: ["Male", "Female", "NaH"],
+    },
+    race: {
+      name: "Race",
+      values: ["Human", "Wookiee", "Droid"],
+    },
+    side: {
+      name: "Side",
+      values: ["Dark", "Light", "Neutral"],
+    },
+  };
+
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.gender));
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.race));
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.side));
 
   const add = Button("addBtn");
   filterGroup.appendChild(add);

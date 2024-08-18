@@ -73,9 +73,24 @@ export function AddForm() {
     marginTop: "25px",
   });
 
-  filterGroup.appendChild(DropdownMenu(null, "slim"));
-  filterGroup.appendChild(DropdownMenu(null, "slim"));
-  filterGroup.appendChild(DropdownMenu(null, "slim"));
+  const dropdownMenuOptions = {
+    gender: {
+      name: "Gender",
+      values: ["Male", "Female", "NaH"],
+    },
+    race: {
+      name: "Race",
+      values: ["Human", "Wookiee", "Droid"],
+    },
+    side: {
+      name: "Side",
+      values: ["Dark", "Light", "Neutral"],
+    },
+  };
+
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.gender, "slim"));
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.race, "slim"));
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.side, "slim"));
 
   leftWrapper.appendChild(filterGroup);
 
