@@ -19,40 +19,49 @@ const stl = {
 const app = document.getElementById("app");
 Object.assign(app.style, stl);
 
-function render() {
+function render(page) {
   app.innerHTML = "";
 
   app.appendChild(Header());
+  app.appendChild(page());
+}
 
-  console.log(window.location.pathname);
+function goTo(page, url) {
+  history.pushState(null, "", url);
+  render(page);
+}
 
-  switch (window.location.pathname) {
+function pageLoad() {
+  const url = window.location.pathname;
+  switch (url) {
     case "/home":
     case "":
     case "/":
-      app.appendChild(homePage());
+      goTo(homePage, url);
       break;
     case "/preview":
-      app.appendChild(previewPage());
+      goTo(previewPage, url);
       break;
     default:
-      app.appendChild(errorPage());
+      goTo(errorPage, url);
       break;
   }
 }
 
-function handlerNavigation(event) {
-  if (event.target.tagName === "A") {
+pageLoad();
+
+window.addEventListener("popstate", pageLoad);
+
+document.addEventListener("click", (event) => {
+  if (event.target.id === "Start") {
+    goTo(previewPage, "http://localhost:3000/preview");
+  } else if (event.target.id === "Return") {
+    goTo(homePage, "http://localhost:3000/home");
+  } else if (event.target.tagName === "A") {
     event.preventDefault();
 
     const href = event.target.getAttribute("href");
     window.history.pushState(null, "", href);
-    render();
+    pageLoad();
   }
-}
-console.log(window.location.pathname);
-render();
-
-window.addEventListener("popstate", render);
-
-document.addEventListener("click", handlerNavigation);
+});

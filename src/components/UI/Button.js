@@ -3,7 +3,7 @@ import clsImg from "./../../../public/icons/cls.png";
 
 export function Button(size, title) {
   const buttonElement = document.createElement("div");
-  buttonElement.id = `${size}-${Math.random().toString(10).substr(2, 6)}`;
+  buttonElement.id = `${title}`;
 
   const buttonTitle = document.createElement("h3");
   const btnAfter = document.createElement("span");
