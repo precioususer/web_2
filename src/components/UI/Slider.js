@@ -3,8 +3,6 @@ import arrow from "./../../../public/icons/arrow.png";
 export function Slider(count, size) {
   const sliderDiv = document.createElement("div");
 
-  console.log(count, size);
-
   const mainStl = {
     sliderDivStl: {
       display: "flex",
@@ -94,7 +92,6 @@ export function Slider(count, size) {
     const point = document.createElement("div");
     sliderDiv.appendChild(point);
     Object.assign(point.style, mainStl.pointStl);
-    console.log(i);
   }
 
   sliderDiv.appendChild(rightBtn);

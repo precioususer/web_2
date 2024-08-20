@@ -1,8 +1,6 @@
 import { Title } from "./Title";
 
 export function TextInput(height, title, counter) {
-  console.log(counter);
-
   const mainStl = {
     textInputElement: {
       display: "flex",
