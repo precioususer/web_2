@@ -1,22 +1,47 @@
 import { BorderLine } from "./../UI/BorderLine";
 import { Button } from "./../UI/Button";
-import { SideWrapper } from "./SideWrapper";
 import { TextInput } from "../UI/TextInput";
 import { DropdownMenu } from "../UI/DropdownMenu";
+import { picPreview } from "./PicPreview";
+import heroes from "./../../mockdata/heroes";
 
 export function AddForm() {
   let AddFormDiv = document.createElement("div");
   AddFormDiv.id = `AddForm-${Math.random().toString(10).substr(2, 6)}`;
 
-  const stl = {
+  const modalStl = {
     position: "absolute",
-    zIndex: "2",
 
-    top: "50%",
-    left: "50%",
-    transform: "translateY(-50%) translateX(-50%)",
+    top: "0",
+    left: "0",
+
+    zIndex: "2",
+    height: "100vh",
+    width: "100vw",
+
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
 
     display: "none",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const modal = document.createElement("div");
+  modal.id = "modal";
+  Object.assign(modal.style, modalStl);
+  modal.appendChild(AddFormDiv);
+
+  modal.addEventListener("click", (event) => {
+    if (event.target.id === "modal") {
+      modal.style.display = "none";
+    }
+  });
+
+  const stl = {
+    position: "relative",
+
+    display: "flex",
+
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -49,19 +74,26 @@ export function AddForm() {
 
   AddFormDiv.addEventListener("click", (event) => {
     if (event.target.closest(`#${closeBtn.id}`)) {
-      AddFormDiv.style.display = "none";
+      modal.style.display = "none";
     }
   });
 
   // --------- Left Side ---------
 
-  //const leftWrapperStl = {};
+  const form = document.createElement("form");
 
-  const leftWrapper = SideWrapper();
-  //Object.assign(leftWrapper.style, leftWrapperStl);
+  const formStl = {
+    display: "flex",
+    flexDirection: "column",
+
+    width: "445px",
+    height: "651px",
+  };
+
+  Object.assign(form.style, formStl);
 
   const nameInput = TextInput("32px", "Add name");
-  leftWrapper.appendChild(nameInput);
+  form.appendChild(nameInput);
 
   const filterGroup = document.createElement("div");
   Object.assign(filterGroup.style, {
@@ -92,17 +124,34 @@ export function AddForm() {
   filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.race, "slim"));
   filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.side, "slim"));
 
-  leftWrapper.appendChild(filterGroup);
+  form.appendChild(filterGroup);
 
   const descriptionInput = TextInput("144px", "Add description");
-  leftWrapper.appendChild(descriptionInput);
+  form.appendChild(descriptionInput);
   descriptionInput.style.marginTop = "25px";
 
   const tagInput = TextInput("32px", "Add tag");
-  leftWrapper.appendChild(tagInput);
+  form.appendChild(tagInput);
   tagInput.style.marginTop = "25px";
 
-  AddFormDiv.appendChild(leftWrapper);
+  // --------- Upload form ---------
+
+  // --------- Save Button ---------
+
+  const saveBtn = Button("large", "Save");
+
+  const saveBtnStl = {
+    position: "absolute",
+
+    bottom: "45px",
+    right: "30px",
+  };
+
+  Object.assign(saveBtn.style, saveBtnStl);
+
+  form.appendChild(saveBtn);
+
+  AddFormDiv.appendChild(form);
 
   // --------- Border Line ---------
 
@@ -112,15 +161,12 @@ export function AddForm() {
 
   // --------- Right Side ---------
 
-  const rightWrapperStl = {};
+  const preview = picPreview(heroes[1]);
 
-  const rightWrapper = SideWrapper();
-  Object.assign(rightWrapper.style, rightWrapperStl);
-
-  AddFormDiv.appendChild(rightWrapper);
+  AddFormDiv.appendChild(preview);
 
   // --------- Return ---------
 
   Object.assign(AddFormDiv.style, stl);
-  return AddFormDiv;
+  return modal;
 }

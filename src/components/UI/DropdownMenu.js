@@ -215,7 +215,8 @@ export function DropdownMenu(props, size) {
     // Menu opening \/
 
     if (className === "dropdownButton") {
-      HTML.addEventListener("click", () => {
+      HTML.addEventListener("click", (event) => {
+        event.preventDefault();
         const dropdownMenu = HTML.parentNode.lastChild;
 
         if (dropdownMenu.style.display === "none") {

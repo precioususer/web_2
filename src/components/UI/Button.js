@@ -3,7 +3,12 @@ import clsImg from "./../../../public/icons/cls.png";
 
 export function Button(size, title) {
   const buttonElement = document.createElement("div");
-  buttonElement.id = `${title}`;
+
+  if (size === "clsBtn") {
+    buttonElement.id = size;
+  } else {
+    buttonElement.id = `${title}`;
+  }
 
   const buttonTitle = document.createElement("h3");
   const btnAfter = document.createElement("span");
@@ -13,6 +18,7 @@ export function Button(size, title) {
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#3fc4fd",
+    color: "#000000",
 
     borderRadius: "4px",
   };

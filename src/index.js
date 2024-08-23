@@ -17,6 +17,7 @@ const stl = {
 };
 
 const app = document.getElementById("app");
+const title = document.getElementById("title");
 Object.assign(app.style, stl);
 
 function render(page) {
@@ -38,12 +39,15 @@ function pageLoad() {
     case "":
     case "/":
       goTo(homePage, url);
+      title.innerText = "StarWars: Home";
       break;
     case "/preview":
       goTo(previewPage, url);
+      title.innerText = "StarWars: Preview";
       break;
     default:
       goTo(errorPage, url);
+      title.innerText = "StarWars: Not found";
       break;
   }
 }
@@ -55,8 +59,10 @@ window.addEventListener("popstate", pageLoad);
 document.addEventListener("click", (event) => {
   if (event.target.id === "Start") {
     goTo(previewPage, "http://localhost:3000/preview");
+    title.innerText = "StarWars: Preview";
   } else if (event.target.id === "Return") {
     goTo(homePage, "http://localhost:3000/home");
+    title.innerText = "StarWars: Home";
   } else if (event.target.tagName === "A") {
     event.preventDefault();
 
