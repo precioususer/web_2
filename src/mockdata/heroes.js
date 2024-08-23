@@ -9,6 +9,7 @@ const heroes = [
     gender: "Male",
     race: "@#$!",
     side: "Light",
+    desc: "The Force is strong with Luke Skywalker. The young Jedi Knight is a guardian of peace and justice in a dark time, and protects the weak with his flashing blade and mastery of the light side.",
   },
   {
     img: Rey,
@@ -16,6 +17,7 @@ const heroes = [
     gender: "Female",
     race: "Human",
     side: "Light",
+    desc: "The Force is strong with Luke Skywalker. The young Jedi Knight is a guardian of peace and justice in a dark time, and protects the weak with his flashing blade and mastery of the light side.",
   },
   {
     img: Chew,
@@ -23,6 +25,7 @@ const heroes = [
     gender: "Male",
     race: "Wookiee",
     side: "Darkness",
+    desc: "The Force is strong with Luke Skywalker. The young Jedi Knight is a guardian of peace and justice in a dark time, and protects the weak with his flashing blade and mastery of the light side.",
   },
 ];
 

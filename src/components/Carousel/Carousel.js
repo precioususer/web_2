@@ -28,8 +28,8 @@ export function Carousel(array) {
   const wrapper = document.createElement("div");
   carouselDiv.appendChild(wrapper);
 
-  array.forEach((el) => {
-    const characterCard = Card(el);
+  array.forEach((el, index) => {
+    const characterCard = Card(el, index);
     wrapper.appendChild(characterCard);
     Object.assign(wrapper.style, mainStl.wrapperStl);
   });

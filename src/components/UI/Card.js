@@ -1,9 +1,9 @@
 import { BorderLine } from "./BorderLine";
 import { Title } from "./Title";
 
-export function Card(props) {
+export function Card(props, id) {
   const cardDiv = document.createElement("div");
-  cardDiv.id = `${props.name}-${Math.random().toString(10).substr(2, 6)}`;
+  cardDiv.id = id;
 
   const mainStl = {
     position: "relative",
@@ -14,6 +14,9 @@ export function Card(props) {
 
     height: "550px",
     width: "410px",
+
+    borderRadius: "6px",
+    overflow: "hidden",
 
     backgroundColor: "#000000",
   };

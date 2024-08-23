@@ -94,7 +94,7 @@ export function Button(size, title) {
       position: "relative",
       display: "block",
 
-      backgroundColor: "#000000",
+      //backgroundColor: "#000000",
       border: "1px solid #FFFFFF",
       borderRadius: "50%",
 
@@ -152,19 +152,19 @@ export function Button(size, title) {
       Object.assign(buttonElement.style, clsBtnStl.btn);
 
       buttonElement.addEventListener("mouseover", () => {
-        buttonElement.style.backgroundColor = "#171717";
+        buttonElement.style.backgroundColor = "#aaaaaa50";
       });
 
       buttonElement.addEventListener("mousedown", () => {
-        buttonElement.style.backgroundColor = "#292929";
+        buttonElement.style.backgroundColor = "#ffffff50";
       });
 
       buttonElement.addEventListener("mouseup", () => {
-        buttonElement.style.backgroundColor = "#171717";
+        buttonElement.style.backgroundColor = "#aaaaaa50";
       });
 
       buttonElement.addEventListener("mouseleave", () => {
-        buttonElement.style.backgroundColor = "#000000";
+        buttonElement.style.backgroundColor = "#00000000";
       });
       break;
 
