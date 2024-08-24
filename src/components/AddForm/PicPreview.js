@@ -1,3 +1,4 @@
+import { characterDesc } from "../CharacterModal/CharacterDesc";
 import { Title } from "../UI/Title";
 import { Card } from "./../UI/Card";
 
@@ -52,6 +53,7 @@ export function picPreview(formData) {
   function viewBtn(title) {
     const btn = document.createElement("button");
     btn.innerText = title;
+    btn.id = title.at(-1);
 
     const stl = {
       height: "15px",
@@ -94,7 +96,11 @@ export function picPreview(formData) {
   };
   Object.assign(previewArea.style, previewAreaStl);
 
-  function cardView(card) {
+  container.appendChild(previewArea);
+
+  // --------- Card view ---------
+
+  function cardView(character) {
     const cardContainer = document.createElement("div");
     const cardContainerStl = {
       position: "relative",
@@ -105,7 +111,7 @@ export function picPreview(formData) {
     };
     Object.assign(cardContainer.style, cardContainerStl);
 
-    const scaledCard = Card(card);
+    const scaledCard = Card(character);
 
     const cardStl = {
       position: "absolute",
@@ -121,9 +127,64 @@ export function picPreview(formData) {
     return cardContainer;
   }
 
-  previewArea.appendChild(cardView(formData));
+  // --------- Modal view ---------
 
-  container.appendChild(previewArea);
+  function modalView(character) {
+    const modalContainer = document.createElement("div");
+    const modalContainerStl = {
+      position: "relative",
+      height: "294px",
+      width: "420px",
+    };
+    Object.assign(modalContainer.style, modalContainerStl);
+
+    const scaledModal = characterDesc(character);
+
+    const modalStl = {
+      position: "absolute",
+      top: "-203px",
+      left: "-291px",
+      alignSelf: "center",
+      scale: "0.42",
+
+      display: "flex",
+    };
+    Object.assign(scaledModal.style, modalStl);
+
+    modalContainer.appendChild(scaledModal);
+
+    return modalContainer;
+  }
+
+  // --------- Actions ---------
+
+  function viewSelect(view) {
+    previewArea.innerHTML = "";
+    previewArea.appendChild(view);
+  }
+
+  viewSelect(cardView(formData));
+
+  btnGroup.addEventListener("click", (event) => {
+    switch (event.target.id) {
+      case "1":
+        viewSelect(cardView(formData));
+        break;
+
+      case "2":
+        viewSelect(modalView(formData));
+        break;
+
+      default:
+        break;
+    }
+  });
+
+  previewArea.addEventListener("click", (event) => {
+    if (event.target.id === "clsBtn") {
+      event.stopPropagation();
+    }
+  });
 
   // --------- Return ---------
   Object.assign(picPreviewDiv.style, rightWrapperStl);
