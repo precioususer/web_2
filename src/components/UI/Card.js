@@ -45,6 +45,8 @@ export function Card(props, id) {
 
   const cardImg = document.createElement("img");
   cardImg.src = props.img;
+  cardImg.alt =
+    "Here can be picture of hero, or villain, or whatever you want.";
   Object.assign(cardImg.style, imgStl);
   cardDiv.appendChild(cardImg);
 

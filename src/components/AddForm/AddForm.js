@@ -77,6 +77,18 @@ export function AddForm() {
     }
   });
 
+  // --------- Form state ---------
+
+  const formState = {
+    img: "",
+    name: "",
+    gender: "",
+    race: "",
+    side: "",
+    desc: "",
+    tag: "",
+  };
+
   // --------- Left Side ---------
 
   const form = document.createElement("form");
@@ -140,6 +152,88 @@ export function AddForm() {
 
   // --------- Upload form ---------
 
+  const picUpload = document.createElement("div");
+
+  const picUploadStl = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+
+    width: "167px",
+
+    marginTop: "41px",
+    padding: "10px",
+
+    backgroundColor: "#000000",
+
+    border: "solid 1px #3fc4fd",
+    borderRadius: "4px",
+  };
+
+  Object.assign(picUpload.style, picUploadStl);
+
+  form.appendChild(picUpload);
+
+  // ---
+
+  const buttonStl = {
+    position: "relative",
+
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    backgroundColor: "#000000",
+
+    border: "solid 1px #3fc4fd",
+    borderRadius: "4px",
+
+    width: "100%",
+    height: "32px",
+
+    color: "#FFFFFF",
+    fontSize: "18px",
+  };
+
+  //------
+
+  const chooseBtn = document.createElement("button");
+  chooseBtn.type = "file";
+  chooseBtn.innerText = "Choose File";
+  Object.assign(chooseBtn.style, buttonStl);
+
+  const hiddenInputStl = {
+    position: "absolute",
+    opacity: "0",
+    width: "100%",
+    height: "100%",
+    cursor: "pointer",
+  };
+
+  const hiddenInput = document.createElement("input");
+  hiddenInput.type = "file";
+  Object.assign(hiddenInput.style, hiddenInputStl);
+  chooseBtn.appendChild(hiddenInput);
+
+  picUpload.appendChild(chooseBtn);
+
+  hiddenInput.addEventListener("change", (event) => {
+    const file = event.target;
+    if (file) {
+      formState.img = file;
+      previewRender(formState);
+      console.log(formState.img);
+    }
+  });
+
+  //-----
+
+  const urlBtn = document.createElement("button");
+  urlBtn.innerText = "Upload by URL";
+
+  Object.assign(urlBtn.style, buttonStl);
+  picUpload.appendChild(urlBtn);
+
   // --------- Save Button ---------
 
   const saveBtn = Button("large", "Save");
@@ -162,18 +256,6 @@ export function AddForm() {
   const line = BorderLine("vertical", "651px", "2px");
   line.style.margin = "auto";
   AddFormDiv.appendChild(line);
-
-  // --------- Form state ---------
-
-  const formState = {
-    img: "",
-    name: "",
-    gender: "",
-    race: "",
-    side: "",
-    desc: "",
-    tag: "",
-  };
 
   // --------- Right Side ---------
 

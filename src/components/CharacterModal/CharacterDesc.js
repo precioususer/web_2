@@ -136,6 +136,7 @@ export function characterDesc(props) {
 
   const image = document.createElement("img");
   image.src = props.img;
+  image.alt = "Here can be picture of hero, or villain, or whatever you want.";
 
   const imageStl = {
     height: "calc(100% - 2px)",
