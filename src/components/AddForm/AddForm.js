@@ -3,7 +3,6 @@ import { Button } from "./../UI/Button";
 import { TextInput } from "../UI/TextInput";
 import { DropdownMenu } from "../UI/DropdownMenu";
 import { picPreview } from "./PicPreview";
-import heroes from "./../../mockdata/heroes";
 
 export function AddForm() {
   let AddFormDiv = document.createElement("div");
@@ -120,9 +119,14 @@ export function AddForm() {
     },
   };
 
-  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.gender, "slim"));
-  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.race, "slim"));
-  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.side, "slim"));
+  const genderSelect = DropdownMenu(dropdownMenuOptions.gender, "slim");
+  filterGroup.appendChild(genderSelect);
+
+  const raceSelect = DropdownMenu(dropdownMenuOptions.race, "slim");
+  filterGroup.appendChild(raceSelect);
+
+  const sideSelect = DropdownMenu(dropdownMenuOptions.side, "slim");
+  filterGroup.appendChild(sideSelect);
 
   form.appendChild(filterGroup);
 
@@ -159,11 +163,71 @@ export function AddForm() {
   line.style.margin = "auto";
   AddFormDiv.appendChild(line);
 
+  // --------- Form state ---------
+
+  const formState = {
+    img: "",
+    name: "",
+    gender: "",
+    race: "",
+    side: "",
+    desc: "",
+    tag: "",
+  };
+
   // --------- Right Side ---------
 
-  const preview = picPreview(heroes[1]);
-
+  const preview = picPreview(formState);
   AddFormDiv.appendChild(preview);
+
+  function previewRender(state) {
+    preview.innerHTML = "";
+    AddFormDiv.removeChild(AddFormDiv.lastChild);
+    AddFormDiv.appendChild(picPreview(state));
+  }
+
+  previewRender(formState);
+
+  // --------- Actions ---------
+
+  nameInput.addEventListener("input", (event) => {
+    formState.name = event.target.value;
+    previewRender(formState);
+  });
+
+  genderSelect.addEventListener("click", (event) => {
+    if (event.target.closest("#dropdownItem")) {
+      const value = event.target.parentNode.lastChild.childNodes;
+      formState.gender = value[0].data;
+      previewRender(formState);
+    }
+  });
+
+  raceSelect.addEventListener("click", (event) => {
+    if (event.target.closest("#dropdownItem")) {
+      const value = event.target.parentNode.lastChild.childNodes;
+      formState.race = value[0].data;
+      previewRender(formState);
+    }
+  });
+
+  sideSelect.addEventListener("click", (event) => {
+    if (event.target.closest("#dropdownItem")) {
+      const value = event.target.parentNode.lastChild.childNodes;
+      formState.side = value[0].data;
+      previewRender(formState);
+    }
+  });
+
+  descriptionInput.addEventListener("input", (event) => {
+    formState.desc = event.target.value;
+    previewRender(formState);
+  });
+
+  tagInput.addEventListener("input", (event) => {
+    formState.tag = event.target.value;
+    previewRender(formState);
+  });
 
   // --------- Return ---------
 

@@ -207,7 +207,7 @@ export function DropdownMenu(props, size) {
   const create = (tag, className) => {
     const HTML = document.createElement(tag);
 
-    HTML.id = `${className}-${Math.random().toString(10).substr(2, 6)}`;
+    HTML.id = `${className}`;
 
     HTML.classList.add(className);
     Object.assign(HTML.style, mainStl[className]);
