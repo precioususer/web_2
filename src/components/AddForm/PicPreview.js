@@ -138,7 +138,7 @@ export function picPreview(formData) {
     };
     Object.assign(modalContainer.style, modalContainerStl);
 
-    const scaledModal = characterDesc(character);
+    const scaledModal = characterDesc(character, "preview");
 
     const modalStl = {
       position: "absolute",

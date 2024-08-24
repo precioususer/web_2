@@ -2,7 +2,7 @@ import { Title } from "../UI/Title";
 import { Button } from "../UI/Button";
 import { BorderLine } from "../UI/BorderLine";
 
-export function characterDesc(props) {
+export function characterDesc(props, type) {
   let characterModalDiv = document.createElement("div");
   characterModalDiv.id = `characterModal-${Math.random().toString(10).substr(2, 6)}`;
 
@@ -39,6 +39,9 @@ export function characterDesc(props) {
   };
 
   const closeBtn = Button("clsBtn");
+  if (type === "preview") {
+    closeBtn.id = "";
+  }
   Object.assign(closeBtn.style, closeBtnStl);
 
   characterModalDiv.appendChild(closeBtn);
@@ -136,7 +139,6 @@ export function characterDesc(props) {
 
   const image = document.createElement("img");
   image.src = props.img;
-  image.alt = "Here can be picture of hero, or villain, or whatever you want.";
 
   const imageStl = {
     height: "calc(100% - 2px)",

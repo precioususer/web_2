@@ -35,7 +35,7 @@ export function characterModal(props) {
   // --------- Close button event ---------
 
   character.addEventListener("click", (event) => {
-    if (event.target.id === "clsBtn") {
+    if (event.target.closest(`#clsBtn`)) {
       modal.style.display = "none";
     }
   });
