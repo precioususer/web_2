@@ -3,6 +3,8 @@ import { Button } from "./../UI/Button";
 import { TextInput } from "../UI/TextInput";
 import { DropdownMenu } from "../UI/DropdownMenu";
 import { picPreview } from "./PicPreview";
+import { urlModal } from "./UrlModal";
+import heroes from "../../mockdata/heroes";
 
 export function AddForm() {
   let AddFormDiv = document.createElement("div");
@@ -193,6 +195,8 @@ export function AddForm() {
 
     color: "#FFFFFF",
     fontSize: "18px",
+
+    cursor: "pointer",
   };
 
   //------
@@ -218,11 +222,16 @@ export function AddForm() {
   picUpload.appendChild(chooseBtn);
 
   hiddenInput.addEventListener("change", (event) => {
-    const file = event.target;
+    event.preventDefault();
+    const file = event.target.files[0];
     if (file) {
-      formState.img = file;
-      previewRender(formState);
-      console.log(formState.img);
+      const fileReader = new FileReader();
+      fileReader.onload = (event) => {
+        const img = event.target.result;
+        formState.img = img;
+        previewRender(formState);
+      };
+      fileReader.readAsDataURL(file);
     }
   });
 
@@ -230,6 +239,14 @@ export function AddForm() {
 
   const urlBtn = document.createElement("button");
   urlBtn.innerText = "Upload by URL";
+
+  const urlInput = urlModal(formState, previewRender);
+  form.appendChild(urlInput);
+
+  urlBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    urlInput.style.display = "flex";
+  });
 
   Object.assign(urlBtn.style, buttonStl);
   picUpload.appendChild(urlBtn);
@@ -250,6 +267,13 @@ export function AddForm() {
   form.appendChild(saveBtn);
 
   AddFormDiv.appendChild(form);
+
+  saveBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    heroes.push(formState);
+    console.log(heroes);
+  });
 
   // --------- Border Line ---------
 
