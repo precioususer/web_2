@@ -99,8 +99,8 @@ export function characterDesc(props, type) {
   Object.assign(heroPropRace.style, heroPropStl);
   Object.assign(heroPropSide.style, heroPropStl);
 
-  heroPropGender.appendChild(Title("p18", props.gender));
   heroPropGender.appendChild(Title("p18", "Gender"));
+  heroPropGender.appendChild(Title("p18", props.gender));
   wrapperInfo.appendChild(heroPropGender);
   wrapperInfo.appendChild(BorderLine("horizontal", "100%"));
   heroPropRace.appendChild(Title("p18", "Race"));
