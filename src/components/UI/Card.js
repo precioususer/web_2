@@ -14,6 +14,7 @@ export function Card(props, id) {
 
     height: "550px",
     width: "410px",
+    minWidth: "410px",
 
     borderRadius: "6px",
     overflow: "hidden",
@@ -28,6 +29,8 @@ export function Card(props, id) {
 
     top: "29px",
     left: "26px",
+
+    width: "100px",
 
     color: "#FFFFFF",
   };

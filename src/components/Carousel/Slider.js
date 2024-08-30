@@ -1,6 +1,6 @@
 import arrow from "./../../../public/icons/arrow.png";
 
-export function Slider(count, size) {
+export function Slider(count, page, size) {
   const sliderDiv = document.createElement("div");
 
   const mainStl = {
@@ -92,6 +92,10 @@ export function Slider(count, size) {
     const point = document.createElement("div");
     sliderDiv.appendChild(point);
     Object.assign(point.style, mainStl.pointStl);
+
+    page - 1 === i
+      ? (point.style.backgroundColor = "#3fc4fd")
+      : (point.style.backgroundColor = "#FFFFFF");
   }
 
   sliderDiv.appendChild(rightBtn);

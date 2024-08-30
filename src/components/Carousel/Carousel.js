@@ -1,7 +1,7 @@
 import { Card } from "../UI/Card";
-import { Slider } from "../UI/Slider";
+import { Slider } from "./Slider";
 
-export function Carousel(array) {
+export function Carousel(characters) {
   const carouselDiv = document.createElement("div");
 
   const mainStl = {
@@ -20,6 +20,9 @@ export function Carousel(array) {
       gap: "25px",
 
       width: "100%",
+
+      //overflow: "hidden",
+      overflowY: "auto",
     },
   };
 
@@ -27,16 +30,47 @@ export function Carousel(array) {
 
   const wrapper = document.createElement("div");
   carouselDiv.appendChild(wrapper);
+  Object.assign(wrapper.style, mainStl.wrapperStl);
 
-  array.forEach((el, index) => {
-    const characterCard = Card(el, index);
-    wrapper.appendChild(characterCard);
-    Object.assign(wrapper.style, mainStl.wrapperStl);
-  });
+  const localState = characters.map((el, index) => Card(el, index));
+
+  // ---------
+
+  function emptyCard(id) {
+    const card = document.createElement("div");
+    card.id = id;
+    const cardStl = {
+      height: "550px",
+      width: "410px",
+      minWidth: "410px",
+
+      pointerEvents: "none",
+    };
+    Object.assign(card.style, cardStl);
+
+    return card;
+  }
+
+  const arrCondition = characters.length % 3;
+
+  if (arrCondition % 3 === 2) {
+    localState.push(emptyCard(localState.length));
+  } else if (arrCondition % 3 === 1) {
+    localState.push(
+      emptyCard(localState.length),
+      emptyCard(localState.length + 1)
+    );
+  }
+
+  // ---------
+
+  const page = 1;
+
+  localState.forEach((card) => wrapper.appendChild(card));
 
   // --------- Slider ---------
 
-  const slider = Slider(array.length);
+  const slider = Slider(characters.length, page);
   carouselDiv.appendChild(slider);
 
   // --------- Return ---------
