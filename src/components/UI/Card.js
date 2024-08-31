@@ -30,7 +30,7 @@ export function Card(props, id) {
     top: "29px",
     left: "26px",
 
-    width: "100px",
+    width: "130px",
 
     color: "#FFFFFF",
   };

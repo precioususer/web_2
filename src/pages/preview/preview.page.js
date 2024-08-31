@@ -43,7 +43,7 @@ export function previewPage() {
   Object.assign(container.style, containerStl);
   previewPageDiv.appendChild(container);
 
-  const addForm = AddForm();
+  const addForm = AddForm(carouselRender);
   container.appendChild(addForm);
 
   container.appendChild(Title("p35", "Who's Your Favorite Star Wars"));
@@ -108,28 +108,36 @@ export function previewPage() {
 
   // --------- Characters ---------
 
-  const characters = Carousel(mockData);
-  characters.style.marginTop = "29px";
-  container.appendChild(characters);
+  function carouselRender(heroes) {
+    if (container.lastChild.id === "carousel") {
+      container.removeChild(container.lastChild);
+    }
 
-  // --------- Card click event ---------
+    const characters = Carousel(heroes);
+    characters.style.marginTop = "29px";
+    container.appendChild(characters);
 
-  const cards = characters.childNodes[0].childNodes;
+    // --------- Card click event ---------
 
-  previewPageDiv.addEventListener("click", (event) => {
-    const clickedElement = event.target;
+    const cards = characters.childNodes[0].childNodes;
 
-    cards.forEach((card) => {
-      const newClass = `card-${card.id}`;
-      card.classList.add(newClass);
+    previewPageDiv.addEventListener("click", (event) => {
+      const clickedElement = event.target;
 
-      if (clickedElement.closest(`.${newClass}`)) {
-        const character = characterModal(mockData[card.id]);
-        previewPageDiv.appendChild(character);
-        character.style.display = "flex";
-      }
+      cards.forEach((card) => {
+        const newClass = `card-${card.id}`;
+        card.classList.add(newClass);
+
+        if (clickedElement.closest(`.${newClass}`)) {
+          const character = characterModal(heroes[card.id]);
+          previewPageDiv.appendChild(character);
+          character.style.display = "flex";
+        }
+      });
     });
-  });
+  }
+
+  carouselRender(mockData);
 
   // --------- Return ---------
 

@@ -6,7 +6,7 @@ import { picPreview } from "./PicPreview";
 import { urlModal } from "./UrlModal";
 import heroes from "../../mockdata/heroes";
 
-export function AddForm() {
+export function AddForm(carouselRender) {
   let AddFormDiv = document.createElement("div");
   AddFormDiv.id = `AddForm-${Math.random().toString(10).substr(2, 6)}`;
 
@@ -272,7 +272,7 @@ export function AddForm() {
     event.preventDefault();
 
     heroes.push(formState);
-    console.log(heroes);
+    carouselRender(heroes);
   });
 
   // --------- Border Line ---------
