@@ -13,6 +13,7 @@ const stl = {
   backgroundColor: "black",
 
   minHeight: "100vh",
+  maxHeight: "100vh",
   overflow: "hidden",
 };
 

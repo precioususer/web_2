@@ -43,8 +43,10 @@ export function previewPage() {
   Object.assign(container.style, containerStl);
   previewPageDiv.appendChild(container);
 
+  const app = document.getElementById("app");
+
   const addForm = AddForm(carouselRender);
-  container.appendChild(addForm);
+  app.appendChild(addForm);
 
   container.appendChild(Title("p35", "Who's Your Favorite Star Wars"));
 
@@ -109,7 +111,7 @@ export function previewPage() {
   // --------- Characters ---------
 
   function carouselRender(heroes) {
-    if (container.lastChild.id === "carousel") {
+    if (container.lastChild.id === "carouselContainer") {
       container.removeChild(container.lastChild);
     }
 

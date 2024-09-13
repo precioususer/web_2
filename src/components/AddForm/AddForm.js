@@ -18,7 +18,7 @@ export function AddForm(carouselRender) {
 
     zIndex: "2",
     height: "100vh",
-    width: "100vw",
+    width: "calc(100%)",
 
     backgroundColor: "rgba(0, 0, 0, 0.6)",
 

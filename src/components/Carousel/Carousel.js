@@ -1,20 +1,25 @@
 import { Card } from "../UI/Card";
 import arrow from "./../../../public/icons/arrow.png";
 
-export function Carousel(characters) {
-  const carouselDiv = document.createElement("div");
-  carouselDiv.id = "carousel";
+export function Carousel(heroes) {
+  const container = document.createElement("div");
+  container.id = "carouselContainer";
+  const containerStl = {
+    display: "flex",
+    flexDirection: "column",
 
-  const mainStl = {
-    carouselStl: {
-      display: "flex",
-      flexDirection: "column",
+    alignItems: "center",
 
-      alignItems: "center",
+    width: "1280px",
 
-      width: "1280px",
-    },
-    wrapperStl: {
+    marginBottom: "20px",
+  };
+  Object.assign(container.style, containerStl);
+
+  function carouselDiv(data) {
+    const carousel = document.createElement("div");
+    carousel.id = "carousel";
+    const carouselStl = {
       display: "flex",
       flexDirection: "row",
       flexWrap: "nowrap",
@@ -25,61 +30,36 @@ export function Carousel(characters) {
       overflowX: "auto",
       scrollSnapType: "x mandatory",
       overflow: "hidden",
-    },
-  };
-
-  // --------- Characters ---------
-
-  const wrapper = document.createElement("div");
-  carouselDiv.appendChild(wrapper);
-  Object.assign(wrapper.style, mainStl.wrapperStl);
-
-  const localState = characters.map((el, index) => Card(el, index));
-
-  // ---------
-
-  function emptyCard(id) {
-    const card = document.createElement("div");
-    card.id = id;
-    const cardStl = {
-      height: "550px",
-      width: "410px",
-      minWidth: "410px",
-
-      pointerEvents: "none",
     };
-    Object.assign(card.style, cardStl);
+    Object.assign(carousel.style, carouselStl);
 
-    return card;
+    //let pageIterator = 1;
+
+    data.map((hero, id) => {
+      const heroCard = Card(hero, id);
+      heroCard.style.scrollSnapAlign = "start";
+      carousel.appendChild(heroCard);
+    });
+
+    return carousel;
   }
+  const carousel = carouselDiv(heroes);
 
-  const arrCondition = characters.length % 3;
-
-  if (arrCondition % 3 === 2) {
-    localState.push(emptyCard(localState.length));
-  } else if (arrCondition % 3 === 1) {
-    localState.push(
-      emptyCard(localState.length),
-      emptyCard(localState.length + 1)
-    );
-  }
+  container.appendChild(carousel);
 
   // ---------
 
-  let sectionIterator = 1;
+  let _PAGE = 1;
+  let currentIndex = 1;
+  const scrollDist = 435;
 
-  localState.forEach((card, index) => {
-    if (index + 1 === 1 || index % 3 === 0) {
-      card.style.scrollSnapAlign = "start";
-      card.classList.add(`${sectionIterator}-next`);
-      sectionIterator = sectionIterator + 1;
-    }
-    wrapper.appendChild(card);
-  });
+  function setIndex() {
+    const scrollPosition = Math.round(
+      document.getElementById("carousel").scrollLeft / scrollDist
+    );
 
-  // --------- Slider ---------
-
-  let page = 1;
+    currentIndex = scrollPosition;
+  }
 
   function slider(count, page) {
     const sliderDiv = document.createElement("div");
@@ -125,22 +105,45 @@ export function Carousel(characters) {
         height: "8px",
 
         borderRadius: "50%",
+
+        cursor: "pointer",
       },
     };
 
     const prewBtn = document.createElement("button");
     const nextBtn = document.createElement("button");
+    function pagePoint(page, i) {
+      const point = document.createElement("div");
+      point.id = `${i + 1}`;
+
+      Object.assign(point.style, mainStl.pointStl);
+
+      _PAGE - 1 === i
+        ? (point.style.backgroundColor = "#3fc4fd")
+        : (point.style.backgroundColor = "#FFFFFF");
+
+      return point;
+    }
 
     sliderDiv.appendChild(prewBtn);
 
     for (let i = 0; i < count / 3; i++) {
-      const point = document.createElement("div");
+      const point = pagePoint(page, i);
       sliderDiv.appendChild(point);
-      Object.assign(point.style, mainStl.pointStl);
 
-      page - 1 === i
-        ? (point.style.backgroundColor = "#3fc4fd")
-        : (point.style.backgroundColor = "#FFFFFF");
+      point.addEventListener("click", (event) => {
+        const page = event.target.id;
+
+        const scrollDist = 1280 * (page - 1);
+
+        carousel.scrollTo({ left: scrollDist, behavior: "smooth" });
+
+        setIndex();
+
+        _PAGE = page;
+
+        sliderRender(heroes.length, _PAGE);
+      });
     }
 
     sliderDiv.appendChild(nextBtn);
@@ -148,27 +151,35 @@ export function Carousel(characters) {
     // ---------
 
     nextBtn.addEventListener("click", () => {
-      if (page < characters.length / 3) {
-        page = page + 1;
-      }
+      carousel.scrollBy({ left: scrollDist, behavior: "smooth" });
 
-      const nextSection = document.getElementsByClassName(`${page}-next`)[0];
+      setIndex();
 
-      nextSection.scrollIntoView({ behavior: "smooth" });
+      const scrollPosition = Math.round(
+        document.getElementById("carousel").scrollLeft / scrollDist / 3
+      );
 
-      sliderRender(characters.length, page);
+      console.log(scrollPosition + 1);
+
+      _PAGE = scrollPosition + 1;
+
+      sliderRender(heroes.length, _PAGE);
     });
 
     prewBtn.addEventListener("click", () => {
-      if (page > 1) {
-        page = page - 1;
-      }
+      carousel.scrollBy({ left: -scrollDist, behavior: "smooth" });
 
-      const prewSection = document.getElementsByClassName(`${page}-next`)[0];
+      setIndex();
 
-      prewSection.scrollIntoView({ behavior: "smooth" });
+      const scrollPosition = Math.round(
+        document.getElementById("carousel").scrollLeft / scrollDist / 3
+      );
 
-      sliderRender(characters.length, page);
+      console.log(scrollPosition + 1);
+
+      _PAGE = scrollPosition + 1;
+
+      sliderRender(heroes.length, _PAGE);
     });
 
     // ---------
@@ -184,18 +195,18 @@ export function Carousel(characters) {
   }
 
   function sliderRender(length, page) {
-    if (carouselDiv.lastChild.id === "slider") {
-      carouselDiv.removeChild(carouselDiv.lastChild);
+    if (container.lastChild.id === "slider") {
+      container.removeChild(container.lastChild);
     }
     const carouselSlider = slider(length, page);
-    carouselDiv.appendChild(carouselSlider);
+    container.appendChild(carouselSlider);
   }
 
-  sliderRender(characters.length, page);
+  sliderRender(heroes.length, _PAGE);
 
-  // --------- Return ---------
+  // ---------
 
-  Object.assign(carouselDiv.style, mainStl.carouselStl);
+  console.log(currentIndex);
 
-  return carouselDiv;
+  return container;
 }
