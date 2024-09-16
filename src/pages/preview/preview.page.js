@@ -6,7 +6,6 @@ import { Button } from "./../../components/UI/Button";
 import { AddForm } from "../../components/AddForm/AddForm";
 import mockData from "./../../mockdata/heroes";
 import { Carousel } from "../../components/Carousel/Carousel";
-import { characterModal } from "../../components/CharacterModal/CharacterModal";
 
 export function previewPage() {
   let previewPageDiv = document.createElement("div");
@@ -116,25 +115,6 @@ export function previewPage() {
     const characters = Carousel(heroes);
     characters.style.marginTop = "29px";
     container.appendChild(characters);
-
-    // --------- Card click event ---------
-
-    const cards = characters.childNodes[0].childNodes;
-
-    previewPageDiv.addEventListener("click", (event) => {
-      const clickedElement = event.target;
-
-      cards.forEach((card) => {
-        const newClass = `card-${card.id}`;
-        card.classList.add(newClass);
-
-        if (clickedElement.closest(`.${newClass}`)) {
-          const character = characterModal(heroes[card.id]);
-          previewPageDiv.appendChild(character);
-          character.style.display = "flex";
-        }
-      });
-    });
   }
 
   carouselRender(mockData);

@@ -1,5 +1,6 @@
 import { BorderLine } from "./BorderLine";
 import { Title } from "./Title";
+import { characterModal } from "../../components/CharacterModal/CharacterModal";
 
 export function Card(props, id) {
   const cardDiv = document.createElement("div");
@@ -93,7 +94,15 @@ export function Card(props, id) {
 
   cardDiv.appendChild(wrapperInfo);
 
-  //-------- Return --------
+  // --------- Character modal ---------
+
+  const app = document.getElementById("app");
+
+  cardDiv.addEventListener("click", () => {
+    app.appendChild(characterModal(props));
+  });
+
+  // -------- Return --------
 
   Object.assign(cardDiv.style, mainStl);
   return cardDiv;

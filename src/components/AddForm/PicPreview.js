@@ -108,6 +108,8 @@ export function picPreview(formData) {
       width: "216px",
 
       boxShadow: "0px 0px 125px -32px rgba(8, 42, 209, 1)",
+
+      pointerEvents: "none",
     };
     Object.assign(cardContainer.style, cardContainerStl);
 

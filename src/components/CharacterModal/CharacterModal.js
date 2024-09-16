@@ -13,10 +13,12 @@ export function characterModal(props) {
 
     backgroundColor: "rgba(0, 0, 0, 0.6)",
 
-    display: "none",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   };
+
+  const app = document.getElementById("app");
 
   const modal = document.createElement("div");
   modal.id = "modal";
@@ -28,7 +30,7 @@ export function characterModal(props) {
 
   modal.addEventListener("click", (event) => {
     if (event.target.id === "modal") {
-      modal.style.display = "none";
+      app.removeChild(app.lastChild);
     }
   });
 
@@ -36,7 +38,7 @@ export function characterModal(props) {
 
   character.addEventListener("click", (event) => {
     if (event.target.closest(`#clsBtn`)) {
-      modal.style.display = "none";
+      app.removeChild(app.lastChild);
     }
   });
 

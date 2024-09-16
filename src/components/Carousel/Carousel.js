@@ -159,8 +159,6 @@ export function Carousel(heroes) {
         document.getElementById("carousel").scrollLeft / scrollDist / 3
       );
 
-      console.log(scrollPosition + 1);
-
       _PAGE = scrollPosition + 1;
 
       sliderRender(heroes.length, _PAGE);
