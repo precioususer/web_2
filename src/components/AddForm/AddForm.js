@@ -5,6 +5,7 @@ import { DropdownMenu } from "../UI/DropdownMenu";
 import { picPreview } from "./PicPreview";
 import { urlModal } from "./UrlModal";
 import heroes from "../../mockdata/heroes";
+import { Title } from "../UI/Title";
 
 export function AddForm(carouselRender) {
   let AddFormDiv = document.createElement("div");
@@ -271,9 +272,120 @@ export function AddForm(carouselRender) {
   saveBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    heroes.push(formState);
-    carouselRender(heroes);
+    if (
+      formState.desc &&
+      formState.gender &&
+      formState.img &&
+      formState.name &&
+      formState.race &&
+      formState.side
+    ) {
+      heroes.push(formState);
+      carouselRender(heroes);
+    } else {
+      const filteredState = Object.fromEntries(
+        Object.entries(formState).filter(([key, value]) => value == "")
+      );
+
+      fillError(filteredState);
+    }
   });
+
+  // --------- Fill Error ---------
+
+  function fillError(errors) {
+    const app = document.getElementById("app");
+
+    // ---------
+
+    const modalStl = {
+      position: "absolute",
+
+      top: "0",
+      left: "0",
+
+      zIndex: "4",
+      height: "100%",
+      width: "100%",
+
+      backgroundColor: "rgba(0, 0, 0, 0.6)",
+
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    };
+
+    const modal = document.createElement("div");
+    modal.id = "errorModal";
+    Object.assign(modal.style, modalStl);
+
+    app.appendChild(modal);
+
+    modal.addEventListener("click", () =>
+      app.removeChild(document.getElementById("errorModal"))
+    );
+
+    // ---------
+
+    const errorModalStl = {
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px",
+
+      backgroundColor: "rgba(255, 0, 0, 0.5)",
+
+      border: "solid 2px white",
+      borderRadius: "6px",
+
+      padding: "10px",
+    };
+
+    const errorModal = document.createElement("div");
+
+    const title = Title("p30", "Please fill this fields:");
+    errorModal.appendChild(title);
+
+    Object.entries(errors).map(([key, value]) => {
+      let errorType = "";
+      switch (key) {
+        case "desc":
+          errorType = "Description";
+          break;
+
+        case "gender":
+          errorType = "Gender";
+          break;
+
+        case "img":
+          errorType = "Image";
+          break;
+
+        case "name":
+          errorType = "Name";
+          break;
+
+        case "side":
+          errorType = "Side";
+          break;
+
+        case "race":
+          errorType = "Race";
+          break;
+
+        default:
+          break;
+      }
+
+      const errorTitle = Title("p24", errorType);
+      errorModal.appendChild(errorTitle);
+    });
+
+    Object.assign(errorModal.style, errorModalStl);
+
+    modal.appendChild(errorModal);
+
+    return errorModal;
+  }
 
   // --------- Border Line ---------
 
