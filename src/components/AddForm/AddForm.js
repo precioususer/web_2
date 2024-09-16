@@ -8,8 +8,12 @@ import heroes from "../../mockdata/heroes";
 import { Title } from "../UI/Title";
 
 export function AddForm(carouselRender) {
+  const app = document.getElementById("app");
+
+  // ---------
+
   let AddFormDiv = document.createElement("div");
-  AddFormDiv.id = `AddForm-${Math.random().toString(10).substr(2, 6)}`;
+  AddFormDiv.id = "AddForm";
 
   const modalStl = {
     position: "absolute",
@@ -23,7 +27,7 @@ export function AddForm(carouselRender) {
 
     backgroundColor: "rgba(0, 0, 0, 0.6)",
 
-    display: "none",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   };
@@ -35,7 +39,10 @@ export function AddForm(carouselRender) {
 
   modal.addEventListener("click", (event) => {
     if (event.target.id === "modal") {
-      modal.style.display = "none";
+      const closeModal = document.getElementById("modal");
+      if (closeModal) {
+        app.removeChild(app.lastChild);
+      }
     }
   });
 
@@ -76,7 +83,10 @@ export function AddForm(carouselRender) {
 
   AddFormDiv.addEventListener("click", (event) => {
     if (event.target.closest(`#${closeBtn.id}`)) {
-      modal.style.display = "none";
+      const closeModal = document.getElementById("modal");
+      if (closeModal) {
+        app.removeChild(app.lastChild);
+      }
     }
   });
 
@@ -282,6 +292,10 @@ export function AddForm(carouselRender) {
     ) {
       heroes.push(formState);
       carouselRender(heroes);
+      const closeModal = document.getElementById("modal");
+      if (closeModal) {
+        app.removeChild(app.lastChild);
+      }
     } else {
       const filteredState = Object.fromEntries(
         Object.entries(formState).filter(([key, value]) => value == "")

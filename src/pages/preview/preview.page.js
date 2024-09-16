@@ -45,9 +45,6 @@ export function previewPage() {
 
   const app = document.getElementById("app");
 
-  const addForm = AddForm(carouselRender);
-  app.appendChild(addForm);
-
   container.appendChild(Title("p35", "Who's Your Favorite Star Wars"));
 
   // --------- Search ---------
@@ -104,7 +101,8 @@ export function previewPage() {
 
   previewPageDiv.addEventListener("click", (event) => {
     if (event.target.closest(`#${add.id}`)) {
-      addForm.style.display = "flex";
+      const addForm = AddForm(carouselRender);
+      app.appendChild(addForm);
     }
   });
 
