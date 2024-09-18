@@ -1,7 +1,7 @@
 import arrowImg from "./../../../public/icons/arrow.png";
 import checkBoxImg from "./../../../public/icons/checkbox.png";
 
-export function DropdownMenu(props, size) {
+export function DropdownMenu(props, size, multiselect) {
   // Default data \/
 
   const defaultObj = {
@@ -261,10 +261,12 @@ export function DropdownMenu(props, size) {
 
           // Closing Menu when smthing was choosen logic \/
 
-          if (dropdownMenu.style.display === "none") {
-            dropdownMenu.style.display = "flex";
-          } else {
-            dropdownMenu.style.display = "none";
+          if (!multiselect) {
+            if (dropdownMenu.style.display === "none") {
+              dropdownMenu.style.display = "flex";
+            } else {
+              dropdownMenu.style.display = "none";
+            }
           }
         });
       });

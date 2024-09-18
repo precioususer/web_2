@@ -4,8 +4,8 @@ import { SearchBar } from "./../../components/UI/SearchBar";
 import { DropdownMenu } from "./../../components/UI/DropdownMenu";
 import { Button } from "./../../components/UI/Button";
 import { AddForm } from "../../components/AddForm/AddForm";
-import mockData from "./../../mockdata/heroes";
 import { Carousel } from "../../components/Carousel/Carousel";
+import heroes from "./../../mockdata/heroes";
 
 export function previewPage() {
   let previewPageDiv = document.createElement("div");
@@ -48,9 +48,26 @@ export function previewPage() {
 
   // --------- Search ---------
 
-  const search = SearchBar();
+  let searchState = Array.from(heroes);
+
+  const search = SearchBar(carouselRender, searchState);
   search.style.marginTop = "29px";
   container.appendChild(search);
+
+  // ---
+
+  search.firstChild.addEventListener("input", (event) => {
+    searchState = Array.from(heroes);
+    const searchRequest = Array.from(event.target.value.toLowerCase());
+
+    searchState = searchState.filter((hero) => {
+      const name = Array.from(hero.name.toLowerCase());
+
+      return searchRequest.every((el, index) => el === name[index]);
+    });
+
+    carouselRender(searchState);
+  });
 
   // --------- Filter group ---------
 
@@ -71,6 +88,8 @@ export function previewPage() {
   const filterGroup = document.createElement("div");
   Object.assign(filterGroup.style, filterGroupStl);
 
+  // ---------
+
   const dropdownMenuOptions = {
     gender: {
       name: "Gender",
@@ -78,7 +97,7 @@ export function previewPage() {
     },
     race: {
       name: "Race",
-      values: ["Human", "Wookiee", "Droid"],
+      values: [],
     },
     side: {
       name: "Side",
@@ -86,13 +105,22 @@ export function previewPage() {
     },
   };
 
-  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.gender));
-  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.race));
-  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.side));
+  heroes.forEach((el) => {
+    if (!dropdownMenuOptions.race.values.includes(`${el.race}`)) {
+      dropdownMenuOptions.race.values.push(el.race);
+    }
+  });
+
+  // ---------
+
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.gender, null, true));
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.race, null, true));
+  filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.side, null, true));
 
   const add = Button("addBtn");
   filterGroup.appendChild(add);
   add.style.marginLeft = "auto";
+  add.id = "AddBtn";
 
   container.appendChild(filterGroup);
 
@@ -117,7 +145,7 @@ export function previewPage() {
     container.appendChild(characters);
   }
 
-  carouselRender(mockData);
+  carouselRender(searchState);
 
   // --------- Return ---------
 
