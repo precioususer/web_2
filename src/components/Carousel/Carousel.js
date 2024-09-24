@@ -17,6 +17,15 @@ export function Carousel(heroes) {
   };
   Object.assign(container.style, containerStl);
 
+  let currentDistance = 0;
+  const scrollDist = 435;
+
+  function setDist() {
+    return (currentDistance = Math.round(
+      document.getElementById("carousel").scrollLeft
+    ));
+  }
+
   if (heroes.length) {
     function carouselDiv(data) {
       const carousel = document.createElement("div");
@@ -49,19 +58,7 @@ export function Carousel(heroes) {
 
     // ---------
 
-    let _PAGE = 1;
-    let currentIndex = 1;
-    const scrollDist = 435;
-
-    function setIndex() {
-      const scrollPosition = Math.round(
-        document.getElementById("carousel").scrollLeft / scrollDist
-      );
-
-      currentIndex = scrollPosition;
-    }
-
-    function slider(count, page) {
+    function slider(count, dist) {
       const sliderDiv = document.createElement("div");
       sliderDiv.id = "slider";
 
@@ -112,13 +109,16 @@ export function Carousel(heroes) {
 
       const prewBtn = document.createElement("button");
       const nextBtn = document.createElement("button");
-      function pagePoint(page, i) {
+
+      function pagePoint(dist, i) {
         const point = document.createElement("div");
         point.id = `${i + 1}`;
 
         Object.assign(point.style, mainStl.pointStl);
 
-        _PAGE - 1 === i
+        console.log(Math.round(dist / scrollDist) + 1);
+
+        Math.round(dist / scrollDist / 3) === i
           ? (point.style.backgroundColor = "#3fc4fd")
           : (point.style.backgroundColor = "#FFFFFF");
 
@@ -128,7 +128,7 @@ export function Carousel(heroes) {
       sliderDiv.appendChild(prewBtn);
 
       for (let i = 0; i < count / 3; i++) {
-        const point = pagePoint(page, i);
+        const point = pagePoint(dist, i);
         sliderDiv.appendChild(point);
 
         point.addEventListener("click", (event) => {
@@ -138,11 +138,7 @@ export function Carousel(heroes) {
 
           carousel.scrollTo({ left: scrollDist, behavior: "smooth" });
 
-          setIndex();
-
-          _PAGE = page;
-
-          sliderRender(heroes.length, _PAGE);
+          sliderRender(heroes.length, setDist());
         });
       }
 
@@ -153,29 +149,13 @@ export function Carousel(heroes) {
       nextBtn.addEventListener("click", () => {
         carousel.scrollBy({ left: scrollDist, behavior: "smooth" });
 
-        setIndex();
-
-        const scrollPosition = Math.round(
-          document.getElementById("carousel").scrollLeft / scrollDist / 3
-        );
-
-        _PAGE = scrollPosition + 1;
-
-        sliderRender(heroes.length, _PAGE);
+        sliderRender(heroes.length, setDist());
       });
 
       prewBtn.addEventListener("click", () => {
         carousel.scrollBy({ left: -scrollDist, behavior: "smooth" });
 
-        setIndex();
-
-        const scrollPosition = Math.round(
-          document.getElementById("carousel").scrollLeft / scrollDist / 3
-        );
-
-        _PAGE = scrollPosition + 1;
-
-        sliderRender(heroes.length, _PAGE);
+        sliderRender(heroes.length, setDist());
       });
 
       // ---------
@@ -190,15 +170,15 @@ export function Carousel(heroes) {
       return sliderDiv;
     }
 
-    function sliderRender(length, page) {
+    function sliderRender(length, dist) {
       if (container.lastChild.id === "slider") {
         container.removeChild(container.lastChild);
       }
-      const carouselSlider = slider(length, page);
+      const carouselSlider = slider(length, dist);
       container.appendChild(carouselSlider);
     }
 
-    sliderRender(heroes.length, _PAGE);
+    sliderRender(heroes.length, currentDistance);
   } else {
     const res = Title("h1", "No result :(");
     container.appendChild(res);

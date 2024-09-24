@@ -14,7 +14,7 @@ const stl = {
 
   minHeight: "100vh",
   maxHeight: "100vh",
-  overflow: "hidden",
+  overflowX: "hidden",
 };
 
 const app = document.getElementById("app");

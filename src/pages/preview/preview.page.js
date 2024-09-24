@@ -125,8 +125,6 @@ export function previewPage() {
       `dropDownList-${type}`
     );
 
-    console.log(dropdownMenuListTyped);
-
     searchState = Array.from(heroes);
     let filterRequest = [];
 
