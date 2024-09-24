@@ -287,6 +287,7 @@ export function DropdownMenu(props, size, multiselect) {
   const dropdownButtonTitle = create("h3", "dropdownButtonTitle");
 
   dropdownButtonTitle.textContent = state.name;
+  dropdownButton.id = `dropbtn-${state.name.toLowerCase()}`;
   dropdownButton.appendChild(dropdownButtonTitle);
   dropdownElement.appendChild(dropdownButton);
 
@@ -295,6 +296,7 @@ export function DropdownMenu(props, size, multiselect) {
 
   const dropdownList = create("ul", "dropdownList");
   dropdownList.setAttribute("name", state.name.toLowerCase());
+  dropdownList.id = `dropDownList-${state.name.toLowerCase()}`;
   dropdownElement.appendChild(dropdownList);
 
   //Creating list of items \/
@@ -304,7 +306,11 @@ export function DropdownMenu(props, size, multiselect) {
     const dropdownItemLabel = create("label", "dropdownItemLabel");
 
     const realCheckbox = create("input", "realCheckbox");
-    realCheckbox.type = "radio";
+
+    multiselect
+      ? (realCheckbox.type = "checkbox")
+      : (realCheckbox.type = "radio");
+
     realCheckbox.setAttribute("name", state.name.toLowerCase());
 
     const customCheckbox = create("span", "customCheckbox");

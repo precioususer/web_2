@@ -1,6 +1,7 @@
 import { BorderLine } from "./BorderLine";
 import { Title } from "./Title";
 import { characterModal } from "../../components/CharacterModal/CharacterModal";
+import blank from "./../../../public/characters/blank.png";
 
 export function Card(props, id) {
   const cardDiv = document.createElement("div");
@@ -48,8 +49,11 @@ export function Card(props, id) {
   };
 
   const cardImg = document.createElement("img");
-  cardImg.src = props.img;
+
+  props.img ? (cardImg.src = props.img) : (cardImg.src = blank);
+
   Object.assign(cardImg.style, imgStl);
+
   cardDiv.appendChild(cardImg);
 
   //-------- Information --------

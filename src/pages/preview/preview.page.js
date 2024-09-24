@@ -56,9 +56,10 @@ export function previewPage() {
 
   // ---
 
-  search.firstChild.addEventListener("input", (event) => {
+  search.firstChild.addEventListener("input", () => {
+    const input = document.getElementById("searchBarElementTextarea");
     searchState = Array.from(heroes);
-    const searchRequest = Array.from(event.target.value.toLowerCase());
+    const searchRequest = Array.from(input.value.toLowerCase());
 
     searchState = searchState.filter((hero) => {
       const name = Array.from(hero.name.toLowerCase());
@@ -116,6 +117,37 @@ export function previewPage() {
   filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.gender, null, true));
   filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.race, null, true));
   filterGroup.appendChild(DropdownMenu(dropdownMenuOptions.side, null, true));
+
+  // ---------
+
+  function filterFn(event, type) {
+    const dropdownMenuListTyped = document.getElementById(
+      `dropDownList-${type}`
+    );
+
+    console.log(dropdownMenuListTyped);
+
+    searchState = Array.from(heroes);
+    let filterRequest = [];
+
+    dropdownMenuListTyped.childNodes.forEach((node) => {
+      const checkbox = node.childNodes[0].childNodes[1];
+      const value = checkbox.parentNode.innerText.toLowerCase();
+      if (checkbox.checked) {
+        filterRequest.push(value);
+      }
+    });
+
+    searchState = searchState.filter((hero) => {
+      return filterRequest.includes(hero[type].toLowerCase());
+    });
+
+    filterRequest.length ? carouselRender(searchState) : carouselRender(heroes);
+  }
+
+  filterGroup.addEventListener("click", (event) => filterFn(event, "race"));
+
+  // --------- Add Button ---------
 
   const add = Button("addBtn");
   filterGroup.appendChild(add);

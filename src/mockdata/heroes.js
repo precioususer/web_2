@@ -57,7 +57,7 @@ const heroes = [
   {
     img: BB,
     name: "BB-8",
-    gender: "Male",
+    gender: "NaH",
     race: "Droid",
     side: "Light",
     desc: "Despite BB-8’s modest appearance, he saved his friends multiple times, giving the saying “never underestimate a droid” its full meaning.",
@@ -66,7 +66,7 @@ const heroes = [
   {
     img: Grievous,
     name: "General Grievous",
-    gender: "Male",
+    gender: "NaH",
     race: "Droid",
     side: "Darkness",
     desc: "A towering Kaleesh cyborg, the mere presence of General Grievous causes unease amongst his enemies.",
