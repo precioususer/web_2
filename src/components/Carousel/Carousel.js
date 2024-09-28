@@ -116,8 +116,6 @@ export function Carousel(heroes) {
 
         Object.assign(point.style, mainStl.pointStl);
 
-        console.log(Math.round(dist / scrollDist) + 1);
-
         Math.round(dist / scrollDist / 3) === i
           ? (point.style.backgroundColor = "#3fc4fd")
           : (point.style.backgroundColor = "#FFFFFF");

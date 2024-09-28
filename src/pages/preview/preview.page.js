@@ -48,9 +48,75 @@ export function previewPage() {
 
   // --------- Search ---------
 
-  let searchState = Array.from(heroes);
+  const searchState = {
+    heroes: Array.from(heroes),
+    filter: {
+      search: [],
+      gender: [],
+      race: [],
+      side: [],
+    },
+    set refresh(request) {
+      this.heroes = Array.from(heroes);
 
-  const search = SearchBar(carouselRender, searchState);
+      switch (request.type) {
+        case "textarea":
+          this.filter.search = request.body;
+          break;
+        case "gender":
+          this.filter.gender = request.body;
+          break;
+        case "race":
+          this.filter.race = request.body;
+          break;
+        case "side":
+          this.filter.side = request.body;
+          break;
+        default:
+          break;
+      }
+
+      const isFilled = Boolean(
+        this.filter.search.length ||
+          this.filter.gender.length ||
+          this.filter.race.length ||
+          this.filter.side.length
+      );
+
+      if (isFilled) {
+        if (this.filter.search.length) {
+          this.heroes = this.heroes.filter((hero) => {
+            const name = Array.from(hero.name.toLowerCase());
+            return this.filter.search.every((el, index) => el === name[index]);
+          });
+        }
+
+        if (this.filter.race.length) {
+          this.heroes = this.heroes.filter((hero) => {
+            return this.filter.race.includes(hero["race"].toLowerCase());
+          });
+        }
+
+        if (this.filter.gender.length) {
+          this.heroes = this.heroes.filter((hero) => {
+            return this.filter.gender.includes(hero["gender"].toLowerCase());
+          });
+        }
+
+        if (this.filter.side.length) {
+          this.heroes = this.heroes.filter((hero) => {
+            return this.filter.side.includes(hero["side"].toLowerCase());
+          });
+        }
+      }
+
+      carouselRender(this.heroes);
+    },
+  };
+
+  // ---
+
+  const search = SearchBar();
   search.style.marginTop = "29px";
   container.appendChild(search);
 
@@ -58,16 +124,13 @@ export function previewPage() {
 
   search.firstChild.addEventListener("input", () => {
     const input = document.getElementById("searchBarElementTextarea");
-    searchState = Array.from(heroes);
-    const searchRequest = Array.from(input.value.toLowerCase());
 
-    searchState = searchState.filter((hero) => {
-      const name = Array.from(hero.name.toLowerCase());
+    const searchRequest = {
+      body: Array.from(input.value.toLowerCase()),
+      type: "textarea",
+    };
 
-      return searchRequest.every((el, index) => el === name[index]);
-    });
-
-    carouselRender(searchState);
+    searchState.refresh = searchRequest;
   });
 
   // --------- Filter group ---------
@@ -125,25 +188,31 @@ export function previewPage() {
       `dropDownList-${type}`
     );
 
-    searchState = Array.from(heroes);
-    let filterRequest = [];
+    const filterRequest = {
+      body: [],
+      type: type,
+    };
 
     dropdownMenuListTyped.childNodes.forEach((node) => {
       const checkbox = node.childNodes[0].childNodes[1];
       const value = checkbox.parentNode.innerText.toLowerCase();
       if (checkbox.checked) {
-        filterRequest.push(value);
+        filterRequest.body.push(value);
       }
     });
 
-    searchState = searchState.filter((hero) => {
-      return filterRequest.includes(hero[type].toLowerCase());
-    });
-
-    filterRequest.length ? carouselRender(searchState) : carouselRender(heroes);
+    searchState.refresh = filterRequest;
   }
 
-  filterGroup.addEventListener("click", (event) => filterFn(event, "race"));
+  filterGroup.childNodes[0].addEventListener("click", (event) =>
+    filterFn(event, "gender")
+  );
+  filterGroup.childNodes[1].addEventListener("click", (event) =>
+    filterFn(event, "race")
+  );
+  filterGroup.childNodes[2].addEventListener("click", (event) =>
+    filterFn(event, "side")
+  );
 
   // --------- Add Button ---------
 
@@ -175,7 +244,7 @@ export function previewPage() {
     container.appendChild(characters);
   }
 
-  carouselRender(searchState);
+  carouselRender(searchState.heroes);
 
   // --------- Return ---------
 
