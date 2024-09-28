@@ -50,6 +50,11 @@ export function Carousel(heroes) {
         carousel.appendChild(heroCard);
       });
 
+      carousel.addEventListener("scroll", () => {
+        setDist();
+        sliderRender(heroes.length, currentDistance);
+      });
+
       return carousel;
     }
     const carousel = carouselDiv(heroes);
