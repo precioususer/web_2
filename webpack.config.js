@@ -1,15 +1,20 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  cache: false,
+
+  entry: "./src/index.tsx",
 
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    assetModuleFilename: "assets/image/[name].[ext]",
+    assetModuleFilename: "assets/images/[name].[hash][ext]",
+  },
+
+  resolve: {
+    extensions: [".jsx", ".tsx", ".ts", ".js"],
   },
 
   plugins: [
@@ -25,13 +30,32 @@ module.exports = {
       rewrites: [{ from: /./, to: "/index.html" }],
     },
   },
+
   module: {
     rules: [
       {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/, // Правило для CSS модулей
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
+          },
+        ],
+      },
+      {
         test: /\.(png|jpe?g|gif)$/i,
-        loader: "file-loader",
-        options: {
-          outputPath: "assets",
+        type: "asset/resource", // Используем встроенный модуль для работы с файлами
+        generator: {
+          filename: "assets/images/[name].[hash][ext]",
         },
       },
     ],

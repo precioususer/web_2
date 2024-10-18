@@ -2,7 +2,7 @@
   "name": "pet",
   "version": "1.0.0",
   "description": "pet project",
-  "main": "./src/index.js",
+  "main": "./src/index.tsx",
   "scripts": {
     "build": "npx webpack --mode production",
     "dev": "npx webpack-dev-server --mode development"
@@ -12,6 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.6.0",
+    "@types/css-modules": "^1.0.5",
+    "css-loader": "^7.1.2",
     "eslint": "^9.6.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
@@ -21,8 +23,21 @@
     "html-webpack-plugin": "^5.6.0",
     "prettier": "3.3.2",
     "prettier-config-standard": "^7.0.0",
+    "style-loader": "^4.0.0",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2"
   }
 }

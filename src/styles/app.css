@@ -1,0 +1,11 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  background-color: black;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-x: hidden;
+}
