@@ -1,0 +1,17 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 49px;
+
+  background-image: url("./../../../public/404.png");
+  background-position: center;
+  background-size: cover;
+
+  padding-top: 60vh;
+
+  border-top: solid 1px white;
+
+  min-height: calc(100vh - 130px - 60vh - 1px);
+  width: calc(100vw);
+}

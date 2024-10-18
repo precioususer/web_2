@@ -1,0 +1,16 @@
+.previewPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 35px;
+
+  padding-right: 50vw;
+  padding-left: 213px;
+
+  background-image: url("./../../../public/bg_1.png");
+  background-position: center;
+  background-size: cover;
+
+  min-height: calc(100vh - 130px);
+  width: calc(50vw - 213px);
+}
