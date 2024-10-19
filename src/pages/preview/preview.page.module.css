@@ -1,0 +1,24 @@
+.previewPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-image: url("./../../../public/bg.png");
+  background-position: center;
+  background-size: cover;
+
+  border-top: solid 1px white;
+
+  min-height: calc(100vh - 130px - 1px);
+  width: calc(100vw);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 35px;
+
+  width: 1280px;
+}

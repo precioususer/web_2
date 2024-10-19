@@ -1,0 +1,11 @@
+.clsBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #3fc4fd;
+  color: #000000;
+
+  border: 0;
+  border-radius: 4px;
+}

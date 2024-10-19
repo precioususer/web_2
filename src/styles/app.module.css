@@ -1,9 +1,10 @@
 @import "./reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;800&display=swap");
 
 .app {
   display: flex;
   flex-direction: column;
-  font-family: Roboto sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   background-color: black;
@@ -11,4 +12,9 @@
   max-height: 100vh;
   overflow-x: hidden;
   color: white;
+}
+
+.app a {
+  color: inherit;
+  text-decoration: none;
 }
