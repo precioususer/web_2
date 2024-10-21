@@ -2,6 +2,7 @@ import React from "react";
 import * as stl from "./home.page.module.css";
 import Title from "../../UI/Title/Title";
 import Button from "../../UI/Button/Button/Button";
+import { Link } from "react-router-dom";
 
 function HomePage(): JSX.Element {
   return (
@@ -12,7 +13,9 @@ function HomePage(): JSX.Element {
         title="You can know the type of heroes, its strengths, disadvantages and abilities"
       />
 
-      <Button size="large" title="Start" />
+      <Button size="regular" title="">
+        <Link to="/preview">Start</Link>
+      </Button>
     </main>
   );
 }
