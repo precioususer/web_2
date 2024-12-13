@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx webpack --mode production",
     "dev": "npx webpack-dev-server --mode development",
-    "start": "webpack serve --port 4001 --mode production"
+    "start": "npx http-server dist -p 4001 -a localhost --mode development"
   },
   "keywords": [],
   "author": "Valery Gusev",
