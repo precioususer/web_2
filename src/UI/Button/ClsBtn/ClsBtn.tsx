@@ -1,13 +1,12 @@
 import React from "react";
-import * as stl from "./button.module.css";
+import * as stl from "./clsBtn.module.css";
 
-interface componentProps {
-  size: string;
-  title: string;
+interface ComponentProps {
+  children?: React.ReactNode | string;
 }
 
-const ClsBtn: React.FC<componentProps> = ({ size, title }) => {
-  return <button className={stl.clsBtn}>{title}</button>;
+const ClsBtn: React.FC<ComponentProps> = ({ children }) => {
+  return <button className={stl.clsBtn}>{children}</button>;
 };
 
 export default ClsBtn;

@@ -1,0 +1,42 @@
+.searchbarElement {
+  width: 100%;
+
+  position: relative;
+}
+
+.searchbar {
+  background-color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+
+  width: calc(100% - 14px - 35px - 2px);
+  height: calc(50px - 9px - 15px - 2px);
+
+  padding-top: 15px;
+  padding-bottom: 9px;
+  padding-left: 14px;
+  padding-right: 35px;
+
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.searchbarElement::after {
+  content: "";
+
+  position: absolute;
+
+  background-image: url("../../../public/icons/search.png");
+  background-size: contain;
+
+  top: 50%;
+  right: 17px;
+  transform: translateY(-50%);
+
+  width: 21px;
+  height: 20px;
+}

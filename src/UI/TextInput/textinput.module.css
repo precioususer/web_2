@@ -1,0 +1,29 @@
+.textinput {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.textarea {
+  background-color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+
+  width: calc(100% - 14px - 14px - 2px);
+
+  resize: none;
+
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 14px;
+  padding-right: 14px;
+
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 18px;
+
+  line-height: 27px;
+
+  color: #ffffff;
+  cursor: pointer;
+}

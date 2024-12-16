@@ -1,13 +1,13 @@
 import React from "react";
-import * as stl from "./button.module.css";
+import * as stl from "./addBtn.module.css";
+import Title from "../../Title/Title";
 
-interface componentProps {
-  size: string;
-  title: string;
-}
-
-const AddBtn: React.FC<componentProps> = ({ size, title }) => {
-  return <button className={stl.addbtn}>{title}</button>;
+const AddBtn: React.FC = () => {
+  return (
+    <button className={stl.addbtn}>
+      <Title size="p18" title="Add" />
+    </button>
+  );
 };
 
 export default AddBtn;

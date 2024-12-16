@@ -1,11 +1,44 @@
 .clsBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 
-  background-color: #3fc4fd;
-  color: #000000;
+  display: block;
 
-  border: 0;
-  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+
+  background-color: #000000;
+  overflow: hidden;
+
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.clsBtn:hover {
+  background-color: #aaaaaa50;
+}
+
+.clsBtn:active {
+  background-color: #ffffff50;
+}
+
+.clsBtn::after {
+  content: "";
+  background-image: url("../../../../public/icons/cls.png");
+  background-size: contain;
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translateY(-50%) translateX(-50%);
+
+  width: 11px;
+  height: 11px;
+
+  cursor: pointer;
 }

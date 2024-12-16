@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App(): JSX.Element {
   return (
-    <Router basename="/star-wars">
+    <Router>
       <div className={stl.app}>
         <Header />
         <Routes>
