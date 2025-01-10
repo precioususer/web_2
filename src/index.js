@@ -59,10 +59,10 @@ window.addEventListener("popstate", pageLoad);
 
 document.addEventListener("click", (event) => {
   if (event.target.id === "Start") {
-    goTo(previewPage, "http://localhost:4001/preview");
+    goTo(previewPage, `${window.location.origin}/preview`);
     title.innerText = "StarWars: Preview";
   } else if (event.target.id === "Return") {
-    goTo(homePage, "http://localhost:4001/home");
+    goTo(homePage, `${window.location.origin}/home`);
     title.innerText = "StarWars: Home";
   } else if (event.target.tagName === "A") {
     event.preventDefault();
