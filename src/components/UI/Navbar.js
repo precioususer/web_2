@@ -1,15 +1,13 @@
 import { Navlink } from "./Navlink.js";
 
-const url = window.location.href;
-
-const linkList = [
-  { title: "Home", href: `${url}/home` },
-  { title: "Preview", href: `${url}/preview` },
-];
-
-export function Navbar() {
+export function Navbar(url) {
   let navbarElement = document.createElement("nav");
   navbarElement.id = "Navbar";
+
+  const linkList = [
+    { title: "Home", href: `${url}home` },
+    { title: "Preview", href: `${url}preview` },
+  ];
 
   const stl = {
     display: "flex",

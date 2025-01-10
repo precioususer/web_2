@@ -1,7 +1,7 @@
 import { Logo } from "./UI/Logo.js";
 import { Navbar } from "./UI/Navbar.js";
 
-export function Header() {
+export function Header(url) {
   let Header = document.createElement("header");
   Header.id = "header";
 
@@ -17,7 +17,7 @@ export function Header() {
   };
 
   Header.appendChild(Logo());
-  Header.appendChild(Navbar());
+  Header.appendChild(Navbar(url));
 
   Object.assign(Header.style, stl);
 

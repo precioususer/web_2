@@ -17,11 +17,13 @@ const stl = {
   overflowX: "hidden",
 };
 
+const url = window.location.href;
+
 const app = document.getElementById("app");
 const title = document.getElementById("title");
 Object.assign(app.style, stl);
 
-app.appendChild(Header());
+app.appendChild(Header(url));
 
 function render(page) {
   app.innerHTML = "";
@@ -33,8 +35,6 @@ function goTo(page, url) {
   history.pushState(null, "", url);
   render(page);
 }
-
-const url = window.location.href;
 
 function pageLoad(url) {
   "/home";
