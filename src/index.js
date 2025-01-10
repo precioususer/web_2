@@ -39,12 +39,12 @@ function goTo(page, url) {
 function pageLoad(url) {
   "/home";
   switch (url) {
-    case `${url}/home`:
+    case `${url}home`:
     case `${url}`:
       goTo(homePage, url);
       title.innerText = "StarWars: Home";
       break;
-    case `${url}/preview`:
+    case `${url}preview`:
       goTo(previewPage, url);
       title.innerText = "StarWars: Preview";
       break;
