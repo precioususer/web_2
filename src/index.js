@@ -39,13 +39,12 @@ const url = window.location.href;
 function pageLoad(url) {
   "/home";
   switch (url) {
-    case "/home":
-    case "":
-    case "/":
+    case `${url}/home`:
+    case `${url}`:
       goTo(homePage, url);
       title.innerText = "StarWars: Home";
       break;
-    case "/preview":
+    case `${url}/preview`:
       goTo(previewPage, url);
       title.innerText = "StarWars: Preview";
       break;
