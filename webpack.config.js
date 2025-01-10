@@ -8,6 +8,7 @@ module.exports = {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/star-wars/",
     clean: true,
     assetModuleFilename: "assets/image/[name].[ext]",
   },
