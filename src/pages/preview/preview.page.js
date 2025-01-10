@@ -22,7 +22,7 @@ export function previewPage() {
 
     borderTop: "solid 1px white",
 
-    minHeight: "calc(100vh - 130px - 1px)",
+    minHeight: "calc(100vh - 95px - 1px)",
     width: "calc(100vw)",
   };
 

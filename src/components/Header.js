@@ -11,7 +11,7 @@ export function Header() {
     gap: "45px",
     backgroundColor: "black",
     color: "white",
-    height: "130px",
+    height: "95px",
     width: "100wh",
     paddingLeft: "80px",
   };

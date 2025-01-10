@@ -18,7 +18,7 @@ export function homePage() {
     backgroundPosition: "center",
     backgroundSize: "cover",
 
-    minHeight: "calc(100vh - 130px)",
+    minHeight: "calc(100vh - 95px)",
     width: "calc(50vw - 213px)",
   };
 
