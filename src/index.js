@@ -21,10 +21,11 @@ const app = document.getElementById("app");
 const title = document.getElementById("title");
 Object.assign(app.style, stl);
 
+app.appendChild(Header());
+
 function render(page) {
   app.innerHTML = "";
 
-  app.appendChild(Header());
   app.appendChild(page());
 }
 
@@ -33,8 +34,10 @@ function goTo(page, url) {
   render(page);
 }
 
-function pageLoad() {
-  const url = window.location.pathname;
+const url = window.location.href;
+
+function pageLoad(url) {
+  "/home";
   switch (url) {
     case "/home":
     case "":
@@ -53,16 +56,16 @@ function pageLoad() {
   }
 }
 
-pageLoad();
+pageLoad(url);
 
 window.addEventListener("popstate", pageLoad);
 
 document.addEventListener("click", (event) => {
   if (event.target.id === "Start") {
-    goTo(previewPage, `${window.location.origin}/preview`);
+    goTo(previewPage, `${url}/preview`);
     title.innerText = "StarWars: Preview";
   } else if (event.target.id === "Return") {
-    goTo(homePage, `${window.location.origin}/home`);
+    goTo(homePage, `${url}/home`);
     title.innerText = "StarWars: Home";
   } else if (event.target.tagName === "A") {
     event.preventDefault();
