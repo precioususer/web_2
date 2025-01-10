@@ -26,7 +26,9 @@ Object.assign(app.style, stl);
 app.appendChild(Header(url));
 
 function render(page) {
-  app.removeChild().lastChild;
+  if (app.childNodes.length > 1) {
+    app.removeChild().lastChild;
+  }
 
   app.appendChild(page());
 }
