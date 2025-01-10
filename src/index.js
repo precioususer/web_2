@@ -23,11 +23,11 @@ const app = document.getElementById("app");
 const title = document.getElementById("title");
 Object.assign(app.style, stl);
 
-app.appendChild(Header(url));
+app.appendChild(Header(url, render));
 
 function render(page) {
   if (app.childNodes.length > 1) {
-    app.removeChild().lastChild;
+    app.removeChild(app.lastChild);
   }
 
   app.appendChild(page());
@@ -39,8 +39,8 @@ function goTo(page, url) {
 }
 
 function pageLoad(url) {
-  "/home";
-  switch (url) {
+  console.log(url);
+  switch (window.location.href) {
     case `${url}home`:
     case `${url}`:
       goTo(homePage, url);
@@ -68,11 +68,21 @@ document.addEventListener("click", (event) => {
   } else if (event.target.id === "Return") {
     goTo(homePage, `${url}home`);
     title.innerText = "StarWars: Home";
-  } else if (event.target.tagName === "A") {
+  } else if (
+    event.target.tagName === "A" &&
+    event.target.innerText.toLowerCase() == "home"
+  ) {
     event.preventDefault();
 
-    const href = event.target.getAttribute("href");
-    window.history.pushState(null, "", href);
-    pageLoad();
+    goTo(homePage, `${url}home`);
+    title.innerText = "StarWars: Home";
+  } else if (
+    event.target.tagName === "A" &&
+    event.target.innerText.toLowerCase() == "preview"
+  ) {
+    event.preventDefault();
+
+    goTo(previewPage, `${url}preview`);
+    title.innerText = "StarWars: Preview";
   }
 });

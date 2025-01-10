@@ -1,6 +1,8 @@
 import { Navlink } from "./Navlink.js";
 
-export function Navbar(url) {
+const url = window.location.href;
+
+export function Navbar() {
   let navbarElement = document.createElement("nav");
   navbarElement.id = "Navbar";
 
