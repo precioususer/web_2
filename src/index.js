@@ -26,7 +26,7 @@ Object.assign(app.style, stl);
 app.appendChild(Header(url));
 
 function render(page) {
-  app.innerHTML = "";
+  app.removeChild().lastChild;
 
   app.appendChild(page());
 }
@@ -61,10 +61,10 @@ window.addEventListener("popstate", pageLoad);
 
 document.addEventListener("click", (event) => {
   if (event.target.id === "Start") {
-    goTo(previewPage, `${url}/preview`);
+    goTo(previewPage, `${url}preview`);
     title.innerText = "StarWars: Preview";
   } else if (event.target.id === "Return") {
-    goTo(homePage, `${url}/home`);
+    goTo(homePage, `${url}home`);
     title.innerText = "StarWars: Home";
   } else if (event.target.tagName === "A") {
     event.preventDefault();
